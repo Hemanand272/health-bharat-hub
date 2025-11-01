@@ -1,20 +1,26 @@
 import { Leaf, Users, Brain, CheckCircle, Video, Shield } from "lucide-react";
+import remediesImage from "@/assets/remedies-feature.jpg";
+import communityImage from "@/assets/community-feature.jpg";
+import aiNutritionImage from "@/assets/ai-nutrition.jpg";
 
 const features = [
   {
     icon: Leaf,
     title: "Verified Home Remedies",
     description: "Natural cures using kitchen ingredients like turmeric, black pepper, and garlic — backed by research and traditional wisdom.",
+    image: remediesImage,
   },
   {
     icon: Users,
     title: "Community Stories",
     description: "Real people sharing personal experiences about managing health conditions and reducing medical expenses.",
+    image: communityImage,
   },
   {
     icon: Brain,
     title: "AI Nutrition Tracking",
     description: "Upload meal photos and get instant insights on vitamins, minerals, calories, and nutritional value.",
+    image: aiNutritionImage,
   },
   {
     icon: Shield,
@@ -50,13 +56,26 @@ const Features = () => {
             return (
               <div
                 key={index}
-                className="bg-card rounded-2xl p-8 shadow-soft hover:shadow-medium transition-smooth group"
+                className="bg-card rounded-2xl overflow-hidden shadow-soft hover-lift hover-glow group animate-fade-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-bounce">
-                  <Icon className="w-7 h-7 text-primary group-hover:text-white transition-smooth" />
+                {feature.image && (
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={feature.image}
+                      alt={feature.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-smooth"
+                    />
+                    <div className="absolute inset-0 gradient-accent opacity-20 group-hover:opacity-30 transition-smooth"></div>
+                  </div>
+                )}
+                <div className="p-8">
+                  <div className="w-14 h-14 gradient-vibrant rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-bounce shadow-soft">
+                    <Icon className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-3 text-foreground">{feature.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-foreground">{feature.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
               </div>
             );
           })}

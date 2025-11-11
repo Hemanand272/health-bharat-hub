@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Features from "@/components/Features";
+import MedicationsCarousel from "@/components/MedicationsCarousel";
 import ProblemSolution from "@/components/ProblemSolution";
 import Testimonials from "@/components/Testimonials";
 import JoinForm from "@/components/JoinForm";
@@ -15,6 +16,7 @@ const Index = () => {
         <Hero />
         <About />
         <Features />
+        <MedicationsCarousel />
         <ProblemSolution />
         <Testimonials />
         <JoinForm />

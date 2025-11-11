@@ -1,6 +1,8 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Clock, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Calendar, Clock, ArrowRight, Share2, Facebook, Twitter, MessageCircle } from "lucide-react";
+import { useState } from "react";
 import turmericRemedies from "@/assets/blog-turmeric-remedies.jpg";
 import nutritionGuide from "@/assets/blog-nutrition-guide.jpg";
 import wellnessYoga from "@/assets/blog-wellness-yoga.jpg";
@@ -66,6 +68,32 @@ const articles = [
 ];
 
 const BlogGrid = () => {
+  const [shareOpenIndex, setShareOpenIndex] = useState<number | null>(null);
+
+  const shareArticle = (platform: string, article: typeof articles[0]) => {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(article.title);
+    const text = encodeURIComponent(article.excerpt);
+
+    let shareUrl = "";
+    switch (platform) {
+      case "facebook":
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+        break;
+      case "twitter":
+        shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+        break;
+      case "whatsapp":
+        shareUrl = `https://wa.me/?text=${title}%20${url}`;
+        break;
+    }
+
+    if (shareUrl) {
+      window.open(shareUrl, "_blank", "width=600,height=400");
+    }
+    setShareOpenIndex(null);
+  };
+
   return (
     <section id="blog" className="py-20 md:py-32 gradient-soft">
       <div className="container mx-auto px-4">
@@ -121,7 +149,63 @@ const BlogGrid = () => {
                   <span className="text-sm text-muted-foreground">
                     By {article.author}
                   </span>
-                  <ArrowRight className="w-5 h-5 text-primary group-hover:translate-x-1 transition-smooth" />
+                  <div className="flex items-center gap-2">
+                    <div className="relative">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8 hover:bg-secondary"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setShareOpenIndex(shareOpenIndex === index ? null : index);
+                        }}
+                      >
+                        <Share2 className="w-4 h-4" />
+                      </Button>
+                      
+                      {shareOpenIndex === index && (
+                        <div className="absolute bottom-full right-0 mb-2 bg-card border border-border rounded-lg shadow-elegant p-2 flex gap-1 z-10 animate-scale-in">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8 hover:bg-blue-500/10 hover:text-blue-500"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              shareArticle("facebook", article);
+                            }}
+                            title="Share on Facebook"
+                          >
+                            <Facebook className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8 hover:bg-sky-500/10 hover:text-sky-500"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              shareArticle("twitter", article);
+                            }}
+                            title="Share on Twitter"
+                          >
+                            <Twitter className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8 hover:bg-green-500/10 hover:text-green-500"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              shareArticle("whatsapp", article);
+                            }}
+                            title="Share on WhatsApp"
+                          >
+                            <MessageCircle className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      )}
+                    </div>
+                    <ArrowRight className="w-5 h-5 text-primary group-hover:translate-x-1 transition-smooth" />
+                  </div>
                 </div>
               </div>
             </Card>

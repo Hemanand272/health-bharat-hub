@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Stethoscope } from "lucide-react";
 import { useState } from "react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
@@ -18,9 +18,11 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 md:w-10 md:h-10 gradient-hero rounded-lg"></div>
-            <span className="text-xl md:text-2xl font-bold text-foreground">My Doctor</span>
+          <div className="flex items-center space-x-2 group cursor-pointer">
+            <div className="w-8 h-8 md:w-10 md:h-10 gradient-vibrant rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:rotate-12 group-hover:shadow-glow">
+              <Stethoscope className="w-5 h-5 md:w-6 md:h-6 text-white" />
+            </div>
+            <span className="text-xl md:text-2xl font-bold text-foreground transition-all duration-300 group-hover:text-primary">My Doctor</span>
           </div>
 
           {/* Desktop Navigation */}

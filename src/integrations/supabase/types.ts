@@ -14,7 +14,120 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      nutrition_entries: {
+        Row: {
+          benefits: string | null
+          calories: number | null
+          carbs: number | null
+          created_at: string
+          description: string | null
+          entry_date: string
+          fats: number | null
+          fiber: number | null
+          food_items: string[]
+          id: string
+          image_url: string | null
+          meal_type: string
+          protein: number | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          benefits?: string | null
+          calories?: number | null
+          carbs?: number | null
+          created_at?: string
+          description?: string | null
+          entry_date?: string
+          fats?: number | null
+          fiber?: number | null
+          food_items: string[]
+          id?: string
+          image_url?: string | null
+          meal_type: string
+          protein?: number | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          benefits?: string | null
+          calories?: number | null
+          carbs?: number | null
+          created_at?: string
+          description?: string | null
+          entry_date?: string
+          fats?: number | null
+          fiber?: number | null
+          food_items?: string[]
+          id?: string
+          image_url?: string | null
+          meal_type?: string
+          protein?: number | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      seasonal_nutrition: {
+        Row: {
+          benefits: string[] | null
+          best_time_to_eat: string | null
+          calories_per_100g: number
+          carbs_per_100g: number | null
+          category: string
+          created_at: string
+          fats_per_100g: number | null
+          fiber_per_100g: number | null
+          id: string
+          image_url: string | null
+          minerals: Json | null
+          name: string
+          precautions: string[] | null
+          protein_per_100g: number | null
+          season: string[]
+          vitamins: Json | null
+        }
+        Insert: {
+          benefits?: string[] | null
+          best_time_to_eat?: string | null
+          calories_per_100g: number
+          carbs_per_100g?: number | null
+          category: string
+          created_at?: string
+          fats_per_100g?: number | null
+          fiber_per_100g?: number | null
+          id?: string
+          image_url?: string | null
+          minerals?: Json | null
+          name: string
+          precautions?: string[] | null
+          protein_per_100g?: number | null
+          season: string[]
+          vitamins?: Json | null
+        }
+        Update: {
+          benefits?: string[] | null
+          best_time_to_eat?: string | null
+          calories_per_100g?: number
+          carbs_per_100g?: number | null
+          category?: string
+          created_at?: string
+          fats_per_100g?: number | null
+          fiber_per_100g?: number | null
+          id?: string
+          image_url?: string | null
+          minerals?: Json | null
+          name?: string
+          precautions?: string[] | null
+          protein_per_100g?: number | null
+          season?: string[]
+          vitamins?: Json | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

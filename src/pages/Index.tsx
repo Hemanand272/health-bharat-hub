@@ -3,6 +3,9 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Features from "@/components/Features";
 import MedicationsCarousel from "@/components/MedicationsCarousel";
+import { HealthEducation } from "@/components/HealthEducation/HealthEducation";
+import { SeasonalNutrition } from "@/components/SeasonalNutrition/SeasonalNutrition";
+import { NutritionTracker } from "@/components/NutritionTracker/NutritionTracker";
 import BlogGrid from "@/components/BlogGrid";
 import ProblemSolution from "@/components/ProblemSolution";
 import Testimonials from "@/components/Testimonials";
@@ -17,6 +20,9 @@ const Index = () => {
         <Hero />
         <About />
         <Features />
+        <HealthEducation />
+        <NutritionTracker />
+        <SeasonalNutrition />
         <MedicationsCarousel />
         <BlogGrid />
         <ProblemSolution />

@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Heart, Brain, Lungs, Activity, Bone, Shield, Droplet, Eye } from "lucide-react";
+import { ArrowRight, Heart, Brain, Wind, Activity, Bone, Shield, Droplet, Eye } from "lucide-react";
 import ayurvedaMeditation from "@/assets/ayurveda-meditation.jpg";
 import barefootWalking from "@/assets/barefoot-walking.jpg";
 import junkFoodEffects from "@/assets/junk-food-effects.jpg";
@@ -9,7 +9,7 @@ import heartHealth from "@/assets/heart-health.jpg";
 
 const bodySystemsGuide = [
   { title: "Heart & Blood", icon: Heart, color: "text-red-500", image: heartHealth, description: "Keep your cardiovascular system healthy naturally.", tips: ["Eat pomegranate, beetroot, garlic", "30 min daily walking", "Reduce salt intake", "Manage stress"], ayurvedicRemedies: ["Arjuna bark tea", "Turmeric milk"] },
-  { title: "Lungs & Airways", icon: Lungs, color: "text-blue-500", image: ayurvedaMeditation, description: "Breathe better with proper care.", tips: ["Practice pranayama daily", "Avoid pollution", "Eat ginger, turmeric, honey"], ayurvedicRemedies: ["Tulsi tea", "Steam with eucalyptus"] },
+  { title: "Lungs & Airways", icon: Wind, color: "text-blue-500", image: ayurvedaMeditation, description: "Breathe better with proper care.", tips: ["Practice pranayama daily", "Avoid pollution", "Eat ginger, turmeric, honey"], ayurvedicRemedies: ["Tulsi tea", "Steam with eucalyptus"] },
   { title: "Digestive System", icon: Activity, color: "text-yellow-600", image: budgetHealthyEating, description: "Support optimal digestion naturally.", tips: ["Fiber-rich foods", "Probiotics daily", "Avoid maida", "Warm water after meals"], ayurvedicRemedies: ["Triphala powder", "Ginger tea"] },
   { title: "Brain & Nerves", icon: Brain, color: "text-purple-500", image: ayurvedaMeditation, description: "Nourish your brain for peak performance.", tips: ["Walnuts, almonds", "7-8 hours sleep", "Meditation", "Limit screen time"], ayurvedicRemedies: ["Brahmi", "Ashwagandha"] },
   { title: "Bones & Muscles", icon: Bone, color: "text-gray-600", image: barefootWalking, description: "Keep bones and muscles strong.", tips: ["Calcium from milk, greens", "Sunlight for Vitamin D", "Protein daily", "Exercise regularly"], ayurvedicRemedies: ["Sesame oil massage", "Moringa"] },
@@ -78,21 +78,21 @@ export const HealthEducation = () => {
             <Card key={index} className="group hover-scale overflow-hidden">
               <div className="relative h-64 overflow-hidden">
                 <img
-                  src={topic.image}
-                  alt={topic.title}
+                  src={guide.image}
+                  alt={guide.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-smooth"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent"></div>
                 <h3 className="absolute bottom-4 left-6 right-6 text-2xl font-bold text-foreground">
-                  {topic.title}
+                  {guide.title}
                 </h3>
               </div>
               <CardContent className="p-6 space-y-4">
-                <p className="text-muted-foreground">{topic.description}</p>
+                <p className="text-muted-foreground">{guide.description}</p>
                 <div className="space-y-2">
                   <h4 className="font-semibold">Key Topics:</h4>
                   <ul className="space-y-1">
-                    {topic.topics.map((item, idx) => (
+                    {guide.topics.map((item, idx) => (
                       <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
                         <span className="text-primary mt-1">•</span>
                         <span>{item}</span>
@@ -107,6 +107,7 @@ export const HealthEducation = () => {
               </CardContent>
             </Card>
           ))}
+        </div>
         </div>
       </div>
     </section>

@@ -98,7 +98,7 @@ const Header = () => {
             </button>
             <ThemeToggle />
             <Button onClick={() => scrollToSection("join")} variant="hero" size="lg">
-              Join Now
+              Get Started
             </Button>
           </nav>
 

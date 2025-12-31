@@ -1,16 +1,32 @@
 import { Button } from "@/components/ui/button";
-import { Menu, X, Stethoscope } from "lucide-react";
+import { Menu, X, Stethoscope, ChevronDown, Apple, Carrot, Leaf } from "lucide-react";
 import { useState } from "react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+const nutritionItems = [
+  { icon: Apple, label: "Fruits Benefits", id: "seasonal-nutrition", filter: "fruits" },
+  { icon: Carrot, label: "Vegetables Benefits", id: "seasonal-nutrition", filter: "vegetables" },
+  { icon: Leaf, label: "Grains & Nuts", id: "seasonal-nutrition", filter: "grains" },
+];
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileNutritionOpen, setIsMobileNutritionOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
       setIsMenuOpen(false);
+      setIsMobileNutritionOpen(false);
     }
   };
 
@@ -26,7 +42,7 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-6">
             <button
               onClick={() => scrollToSection("home")}
               className="text-foreground hover:text-primary transition-smooth"
@@ -39,23 +55,46 @@ const Header = () => {
             >
               About
             </button>
+            
+            {/* Nutrition Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1 text-foreground hover:text-primary transition-smooth focus:outline-none">
+                Nutrition <ChevronDown className="w-4 h-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56 bg-background border border-border z-50">
+                <DropdownMenuLabel>Nutritional Benefits</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                {nutritionItems.map((item) => (
+                  <DropdownMenuItem
+                    key={item.label}
+                    onClick={() => scrollToSection(item.id)}
+                    className="cursor-pointer flex items-center gap-2"
+                  >
+                    <item.icon className="w-4 h-4 text-primary" />
+                    {item.label}
+                  </DropdownMenuItem>
+                ))}
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onClick={() => scrollToSection("health-education")}
+                  className="cursor-pointer"
+                >
+                  Body Health Guide
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             <button
-              onClick={() => scrollToSection("features")}
+              onClick={() => scrollToSection("consultation")}
               className="text-foreground hover:text-primary transition-smooth"
             >
-              Features
+              Consult Doctor
             </button>
             <button
               onClick={() => scrollToSection("blog")}
               className="text-foreground hover:text-primary transition-smooth"
             >
               Articles
-            </button>
-            <button
-              onClick={() => scrollToSection("testimonials")}
-              className="text-foreground hover:text-primary transition-smooth"
-            >
-              Community
             </button>
             <ThemeToggle />
             <Button onClick={() => scrollToSection("join")} variant="hero" size="lg">
@@ -77,7 +116,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="md:hidden py-4 space-y-4 animate-slide-up">
+          <nav className="md:hidden py-4 space-y-2 animate-slide-up">
             <button
               onClick={() => scrollToSection("home")}
               className="block w-full text-left px-4 py-2 text-foreground hover:bg-secondary rounded-lg transition-smooth"
@@ -90,11 +129,43 @@ const Header = () => {
             >
               About
             </button>
+            
+            {/* Mobile Nutrition Dropdown */}
+            <div>
+              <button
+                onClick={() => setIsMobileNutritionOpen(!isMobileNutritionOpen)}
+                className="flex items-center justify-between w-full text-left px-4 py-2 text-foreground hover:bg-secondary rounded-lg transition-smooth"
+              >
+                <span>Nutrition Benefits</span>
+                <ChevronDown className={`w-4 h-4 transition-transform ${isMobileNutritionOpen ? "rotate-180" : ""}`} />
+              </button>
+              {isMobileNutritionOpen && (
+                <div className="ml-4 mt-1 space-y-1 bg-secondary/50 rounded-lg p-2">
+                  {nutritionItems.map((item) => (
+                    <button
+                      key={item.label}
+                      onClick={() => scrollToSection(item.id)}
+                      className="flex items-center gap-2 w-full text-left px-3 py-2 text-sm text-foreground hover:bg-secondary rounded-lg transition-smooth"
+                    >
+                      <item.icon className="w-4 h-4 text-primary" />
+                      {item.label}
+                    </button>
+                  ))}
+                  <button
+                    onClick={() => scrollToSection("health-education")}
+                    className="block w-full text-left px-3 py-2 text-sm text-foreground hover:bg-secondary rounded-lg transition-smooth"
+                  >
+                    Body Health Guide
+                  </button>
+                </div>
+              )}
+            </div>
+
             <button
-              onClick={() => scrollToSection("features")}
+              onClick={() => scrollToSection("consultation")}
               className="block w-full text-left px-4 py-2 text-foreground hover:bg-secondary rounded-lg transition-smooth"
             >
-              Features
+              Consult Doctor
             </button>
             <button
               onClick={() => scrollToSection("blog")}
@@ -102,13 +173,7 @@ const Header = () => {
             >
               Articles
             </button>
-            <button
-              onClick={() => scrollToSection("testimonials")}
-              className="block w-full text-left px-4 py-2 text-foreground hover:bg-secondary rounded-lg transition-smooth"
-            >
-              Community
-            </button>
-            <div className="px-4">
+            <div className="px-4 pt-2">
               <Button onClick={() => scrollToSection("join")} variant="hero" size="lg" className="w-full">
                 Join Now
               </Button>

@@ -6,6 +6,7 @@ import MedicationsCarousel from "@/components/MedicationsCarousel";
 import { HealthEducation } from "@/components/HealthEducation/HealthEducation";
 import { SeasonalNutrition } from "@/components/SeasonalNutrition/SeasonalNutrition";
 import { NutritionTracker } from "@/components/NutritionTracker/NutritionTracker";
+import { DoctorConsultation } from "@/components/DoctorConsultation/DoctorConsultation";
 import BlogGrid from "@/components/BlogGrid";
 import ProblemSolution from "@/components/ProblemSolution";
 import Testimonials from "@/components/Testimonials";
@@ -23,6 +24,7 @@ const Index = () => {
         <HealthEducation />
         <NutritionTracker />
         <SeasonalNutrition />
+        <DoctorConsultation />
         <MedicationsCarousel />
         <BlogGrid />
         <ProblemSolution />

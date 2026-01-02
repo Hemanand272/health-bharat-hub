@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { 
-  Home, Info, Apple, Carrot, Leaf, Heart, Stethoscope, BookOpen, 
-  Users, MessageSquare, ChevronLeft, ChevronRight, Wheat, Brain,
-  GraduationCap, ClipboardList, Star
+  Home, Info, Heart, Stethoscope, BookOpen, 
+  Users, MessageSquare, ChevronLeft, ChevronRight, Brain,
+  Leaf, Star, Pill, Sparkles
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -17,27 +17,18 @@ const menuItems = [
   { id: "home", label: "Home", icon: Home },
   { id: "about", label: "About Us", icon: Info },
   { id: "features", label: "Features", icon: Star },
-  { 
-    id: "nutrition", 
-    label: "Nutrition", 
-    icon: Apple,
-    subItems: [
-      { id: "fruits", label: "Fruits Benefits", icon: Apple },
-      { id: "vegetables", label: "Vegetables Benefits", icon: Carrot },
-      { id: "grains", label: "Grains & Nuts", icon: Wheat },
-      { id: "nutrition-analyzer", label: "AI Food Analyzer", icon: ClipboardList },
-    ]
-  },
+  { id: "nutrition-analyzer", label: "AI Food Analyzer", icon: Sparkles },
   { 
     id: "health-guide", 
     label: "Body Health", 
     icon: Heart,
     subItems: [
-      { id: "body-systems", label: "Body Systems Guide", icon: Brain },
-      { id: "lifestyle", label: "Lifestyle & Wellness", icon: Leaf },
+      { id: "body-systems-chat", label: "Body Systems Guide", icon: Brain },
+      { id: "lifestyle-chat", label: "Lifestyle & Wellness", icon: Leaf },
     ]
   },
   { id: "consultation", label: "Doctor Consultation", icon: Stethoscope },
+  { id: "medicine-store", label: "Medicine Store", icon: Pill },
   { id: "blog", label: "Health Articles", icon: BookOpen },
   { id: "testimonials", label: "Testimonials", icon: Users },
   { id: "join", label: "Join Community", icon: MessageSquare },
@@ -107,7 +98,6 @@ export const AppSidebar = ({ onNavigate, activeSection, onCollapseChange }: Side
                 )}
               </button>
               
-              {/* Sub Items */}
               {!isCollapsed && item.subItems && expandedMenus.includes(item.id) && (
                 <div className="ml-4 mt-1 space-y-1 border-l-2 border-border pl-2">
                   {item.subItems.map((subItem) => (
@@ -132,22 +122,9 @@ export const AppSidebar = ({ onNavigate, activeSection, onCollapseChange }: Side
         </nav>
       </div>
       
-      {/* Collapse Toggle */}
       <div className="p-2 border-t border-border">
-        <Button
-          variant="ghost"
-          size="sm"
-          className="w-full justify-center"
-          onClick={handleCollapse}
-        >
-          {isCollapsed ? (
-            <ChevronRight className="w-4 h-4" />
-          ) : (
-            <>
-              <ChevronLeft className="w-4 h-4 mr-2" />
-              <span>Collapse</span>
-            </>
-          )}
+        <Button variant="ghost" size="sm" className="w-full justify-center" onClick={handleCollapse}>
+          {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <><ChevronLeft className="w-4 h-4 mr-2" /><span>Collapse</span></>}
         </Button>
       </div>
     </aside>

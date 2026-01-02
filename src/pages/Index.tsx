@@ -7,17 +7,15 @@ import Features from "@/components/Features";
 import MedicationsCarousel from "@/components/MedicationsCarousel";
 import { NutritionAnalyzer } from "@/components/NutritionTracker/NutritionAnalyzer";
 import { DoctorConsultation } from "@/components/DoctorConsultation/DoctorConsultation";
-import BlogGrid from "@/components/BlogGrid";
+import { HealthArticles } from "@/components/HealthArticles/HealthArticles";
 import ProblemSolution from "@/components/ProblemSolution";
 import Testimonials from "@/components/Testimonials";
 import JoinForm from "@/components/JoinForm";
 import Footer from "@/components/Footer";
 import { AppSidebar } from "@/components/Sidebar/AppSidebar";
-import { FruitsSection } from "@/components/NutritionContent/FruitsSection";
-import { VegetablesSection } from "@/components/NutritionContent/VegetablesSection";
-import { GrainsSection } from "@/components/NutritionContent/GrainsSection";
-import { BodySystemsSection } from "@/components/BodyHealth/BodySystemsSection";
-import { LifestyleSection } from "@/components/BodyHealth/LifestyleSection";
+import { BodySystemsChat } from "@/components/BodyHealth/BodySystemsChat";
+import { LifestyleChat } from "@/components/BodyHealth/LifestyleChat";
+import { MedicinePlatform } from "@/components/MedicinePlatform/MedicinePlatform";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -25,8 +23,7 @@ const Index = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   const handleNavigate = (section: string) => {
-    // Content sections that should be shown on demand
-    const contentSections = ["fruits", "vegetables", "grains", "body-systems", "lifestyle", "nutrition-analyzer"];
+    const contentSections = ["body-systems-chat", "lifestyle-chat", "nutrition-analyzer", "medicine-store"];
     
     if (contentSections.includes(section)) {
       setShowContent(section);
@@ -37,50 +34,29 @@ const Index = () => {
       setActiveSection(section);
       setTimeout(() => {
         const element = document.getElementById(section);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
+        if (element) element.scrollIntoView({ behavior: "smooth" });
       }, 100);
     }
   };
 
-  // Render content sections based on selection
   const renderContentSection = () => {
     switch (showContent) {
-      case "fruits":
-        return <FruitsSection />;
-      case "vegetables":
-        return <VegetablesSection />;
-      case "grains":
-        return <GrainsSection />;
-      case "body-systems":
-        return <BodySystemsSection />;
-      case "lifestyle":
-        return <LifestyleSection />;
-      case "nutrition-analyzer":
-        return <NutritionAnalyzer />;
-      default:
-        return null;
+      case "body-systems-chat": return <BodySystemsChat />;
+      case "lifestyle-chat": return <LifestyleChat />;
+      case "nutrition-analyzer": return <NutritionAnalyzer />;
+      case "medicine-store": return <MedicinePlatform />;
+      default: return null;
     }
   };
 
   return (
     <div className="min-h-screen">
       <Header />
-      <AppSidebar 
-        onNavigate={handleNavigate} 
-        activeSection={activeSection} 
-        onCollapseChange={setSidebarCollapsed}
-      />
+      <AppSidebar onNavigate={handleNavigate} activeSection={activeSection} onCollapseChange={setSidebarCollapsed} />
       
-      <main className={cn(
-        "transition-all duration-300",
-        sidebarCollapsed ? "lg:ml-16" : "lg:ml-64"
-      )}>
+      <main className={cn("transition-all duration-300", sidebarCollapsed ? "lg:ml-16" : "lg:ml-64")}>
         {showContent ? (
-          <div className="pt-20 md:pt-24">
-            {renderContentSection()}
-          </div>
+          <div className="pt-20 md:pt-24">{renderContentSection()}</div>
         ) : (
           <>
             <Hero />
@@ -88,7 +64,7 @@ const Index = () => {
             <Features />
             <DoctorConsultation />
             <MedicationsCarousel />
-            <BlogGrid />
+            <HealthArticles />
             <ProblemSolution />
             <Testimonials />
             <JoinForm />

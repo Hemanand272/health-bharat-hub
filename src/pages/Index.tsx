@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -21,6 +22,7 @@ import { LifestyleSection } from "@/components/BodyHealth/LifestyleSection";
 const Index = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [showContent, setShowContent] = useState<string | null>(null);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   const handleNavigate = (section: string) => {
     // Content sections that should be shown on demand
@@ -63,9 +65,16 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      <AppSidebar onNavigate={handleNavigate} activeSection={activeSection} />
+      <AppSidebar 
+        onNavigate={handleNavigate} 
+        activeSection={activeSection} 
+        onCollapseChange={setSidebarCollapsed}
+      />
       
-      <main className="lg:ml-64">
+      <main className={cn(
+        "transition-all duration-300",
+        sidebarCollapsed ? "lg:ml-16" : "lg:ml-64"
+      )}>
         {showContent ? (
           <div className="pt-20 md:pt-24">
             {renderContentSection()}

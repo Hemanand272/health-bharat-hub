@@ -25,6 +25,7 @@ const menuItems = [
       { id: "fruits", label: "Fruits Benefits", icon: Apple },
       { id: "vegetables", label: "Vegetables Benefits", icon: Carrot },
       { id: "grains", label: "Grains & Nuts", icon: Wheat },
+      { id: "nutrition-analyzer", label: "AI Food Analyzer", icon: ClipboardList },
     ]
   },
   { 
@@ -36,7 +37,6 @@ const menuItems = [
       { id: "lifestyle", label: "Lifestyle & Wellness", icon: Leaf },
     ]
   },
-  { id: "nutrition-tracker", label: "Nutrition Tracker", icon: ClipboardList },
   { id: "consultation", label: "Doctor Consultation", icon: Stethoscope },
   { id: "blog", label: "Health Articles", icon: BookOpen },
   { id: "testimonials", label: "Testimonials", icon: Users },

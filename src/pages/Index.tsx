@@ -5,7 +5,7 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Features from "@/components/Features";
 import MedicationsCarousel from "@/components/MedicationsCarousel";
-import { NutritionTracker } from "@/components/NutritionTracker/NutritionTracker";
+import { NutritionAnalyzer } from "@/components/NutritionTracker/NutritionAnalyzer";
 import { DoctorConsultation } from "@/components/DoctorConsultation/DoctorConsultation";
 import BlogGrid from "@/components/BlogGrid";
 import ProblemSolution from "@/components/ProblemSolution";
@@ -26,7 +26,7 @@ const Index = () => {
 
   const handleNavigate = (section: string) => {
     // Content sections that should be shown on demand
-    const contentSections = ["fruits", "vegetables", "grains", "body-systems", "lifestyle"];
+    const contentSections = ["fruits", "vegetables", "grains", "body-systems", "lifestyle", "nutrition-analyzer"];
     
     if (contentSections.includes(section)) {
       setShowContent(section);
@@ -57,6 +57,8 @@ const Index = () => {
         return <BodySystemsSection />;
       case "lifestyle":
         return <LifestyleSection />;
+      case "nutrition-analyzer":
+        return <NutritionAnalyzer />;
       default:
         return null;
     }
@@ -84,7 +86,6 @@ const Index = () => {
             <Hero />
             <About />
             <Features />
-            <NutritionTracker />
             <DoctorConsultation />
             <MedicationsCarousel />
             <BlogGrid />

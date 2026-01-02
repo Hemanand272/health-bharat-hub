@@ -2,6 +2,9 @@ import { Leaf, Users, Brain, CheckCircle, Video, Shield } from "lucide-react";
 import remediesImage from "@/assets/remedies-feature.jpg";
 import communityImage from "@/assets/community-feature.jpg";
 import aiNutritionImage from "@/assets/ai-nutrition.jpg";
+import expertArticlesImage from "@/assets/expert-articles.jpg";
+import wellnessLearningImage from "@/assets/wellness-learning.jpg";
+import preventiveHealthImage from "@/assets/preventive-health.jpg";
 
 const features = [
   {
@@ -26,16 +29,19 @@ const features = [
     icon: Shield,
     title: "Expert-Verified Articles",
     description: "Doctors and researchers publish verified medical and nutritional information you can trust.",
+    image: expertArticlesImage,
   },
   {
     icon: Video,
     title: "Wellness Learning Hub",
     description: "Video lessons, health articles, and awareness programs to educate and empower your wellness journey.",
+    image: wellnessLearningImage,
   },
   {
     icon: CheckCircle,
     title: "Preventive Care Focus",
     description: "Learn to prevent health issues before they start with proper nutrition and lifestyle guidance.",
+    image: preventiveHealthImage,
   },
 ];
 

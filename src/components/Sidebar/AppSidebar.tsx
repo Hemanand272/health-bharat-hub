@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 interface SidebarProps {
   onNavigate: (section: string) => void;
   activeSection: string;
+  onCollapseChange?: (collapsed: boolean) => void;
 }
 
 const menuItems = [
@@ -42,9 +43,15 @@ const menuItems = [
   { id: "join", label: "Join Community", icon: MessageSquare },
 ];
 
-export const AppSidebar = ({ onNavigate, activeSection }: SidebarProps) => {
+export const AppSidebar = ({ onNavigate, activeSection, onCollapseChange }: SidebarProps) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [expandedMenus, setExpandedMenus] = useState<string[]>([]);
+
+  const handleCollapse = () => {
+    const newCollapsed = !isCollapsed;
+    setIsCollapsed(newCollapsed);
+    onCollapseChange?.(newCollapsed);
+  };
 
   const toggleMenu = (id: string) => {
     setExpandedMenus(prev => 
@@ -66,6 +73,7 @@ export const AppSidebar = ({ onNavigate, activeSection }: SidebarProps) => {
         "fixed left-0 top-16 md:top-20 h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] bg-background border-r border-border z-40 transition-all duration-300 hidden lg:flex flex-col",
         isCollapsed ? "w-16" : "w-64"
       )}
+      data-collapsed={isCollapsed}
     >
       <div className="flex-1 overflow-y-auto py-4">
         <nav className="space-y-1 px-2">
@@ -130,7 +138,7 @@ export const AppSidebar = ({ onNavigate, activeSection }: SidebarProps) => {
           variant="ghost"
           size="sm"
           className="w-full justify-center"
-          onClick={() => setIsCollapsed(!isCollapsed)}
+          onClick={handleCollapse}
         >
           {isCollapsed ? (
             <ChevronRight className="w-4 h-4" />

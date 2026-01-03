@@ -165,31 +165,31 @@ export const NutritionAnalyzer = () => {
   ];
 
   return (
-    <section id="nutrition-analyzer" className="py-20 md:py-32">
-      <div className="container mx-auto px-4 max-w-4xl">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary mb-4">
+    <section id="nutrition-analyzer" className="py-8 md:py-20 lg:py-32">
+      <div className="container mx-auto px-3 md:px-4 max-w-4xl">
+        <div className="text-center mb-6 md:mb-12">
+          <div className="inline-flex items-center gap-2 px-3 md:px-4 py-2 bg-primary/10 rounded-full text-primary mb-3 md:mb-4">
             <Sparkles className="w-4 h-4" />
-            <span className="text-sm font-medium">AI-Powered Nutrition Analysis</span>
+            <span className="text-xs md:text-sm font-medium">AI-Powered Nutrition Analysis</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 gradient-text">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 gradient-text">
             Analyze Your Food
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto px-2">
             Upload a photo of your meal or ask any nutrition question. Get instant AI-powered analysis with detailed nutritional information.
           </p>
         </div>
 
         {/* Conversation History */}
         {conversationHistory.length > 0 && (
-          <div className="space-y-4 mb-8">
+          <div className="space-y-3 md:space-y-4 mb-6 md:mb-8 max-h-[50vh] md:max-h-[60vh] overflow-y-auto">
             {conversationHistory.map((msg, idx) => (
               <div
                 key={idx}
                 className={`flex ${msg.type === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[85%] rounded-2xl p-4 ${
+                  className={`max-w-[90%] md:max-w-[85%] rounded-2xl p-3 md:p-4 ${
                     msg.type === "user"
                       ? "bg-primary text-primary-foreground"
                       : "bg-secondary text-secondary-foreground"
@@ -199,10 +199,10 @@ export const NutritionAnalyzer = () => {
                     <img
                       src={msg.image}
                       alt="Food"
-                      className="rounded-lg mb-3 max-h-48 object-cover"
+                      className="rounded-lg mb-2 md:mb-3 max-h-32 md:max-h-48 object-cover"
                     />
                   )}
-                  <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap">
+                  <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap text-sm md:text-base">
                     {msg.content}
                   </div>
                 </div>
@@ -212,8 +212,8 @@ export const NutritionAnalyzer = () => {
             {/* Current streaming response */}
             {isAnalyzing && response && (
               <div className="flex justify-start">
-                <div className="max-w-[85%] rounded-2xl p-4 bg-secondary text-secondary-foreground">
-                  <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap">
+                <div className="max-w-[90%] md:max-w-[85%] rounded-2xl p-3 md:p-4 bg-secondary text-secondary-foreground">
+                  <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap text-sm md:text-base">
                     {response}
                   </div>
                 </div>
@@ -224,12 +224,12 @@ export const NutritionAnalyzer = () => {
 
         {/* Suggested Questions */}
         {conversationHistory.length === 0 && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-6 md:mb-8">
             {suggestedQuestions.map((q, idx) => (
               <button
                 key={idx}
                 onClick={() => setQuery(q)}
-                className="p-3 text-sm text-left bg-secondary/50 hover:bg-secondary rounded-xl transition-colors border border-border"
+                className="p-3 text-xs md:text-sm text-left bg-secondary/50 hover:bg-secondary rounded-xl transition-colors border border-border"
               >
                 {q}
               </button>
@@ -238,25 +238,25 @@ export const NutritionAnalyzer = () => {
         )}
 
         {/* Input Area */}
-        <Card className="p-4 shadow-lg border-2 border-border/50">
+        <Card className="p-3 md:p-4 shadow-lg border-2 border-border/50">
           {/* Image Preview */}
           {imagePreview && (
-            <div className="relative inline-block mb-4">
+            <div className="relative inline-block mb-3 md:mb-4">
               <img
                 src={imagePreview}
                 alt="Upload preview"
-                className="max-h-32 rounded-lg object-cover"
+                className="max-h-24 md:max-h-32 rounded-lg object-cover"
               />
               <button
                 onClick={removeImage}
                 className="absolute -top-2 -right-2 p-1 bg-destructive text-destructive-foreground rounded-full hover:bg-destructive/90"
               >
-                <X className="w-4 h-4" />
+                <X className="w-3 h-3 md:w-4 md:h-4" />
               </button>
             </div>
           )}
 
-          <div className="flex items-end gap-3">
+          <div className="flex items-end gap-2 md:gap-3">
             {/* Image Upload Button */}
             <input
               type="file"
@@ -270,10 +270,10 @@ export const NutritionAnalyzer = () => {
               variant="outline"
               size="icon"
               onClick={() => fileInputRef.current?.click()}
-              className="shrink-0 h-12 w-12"
+              className="shrink-0 h-10 w-10 md:h-12 md:w-12"
               disabled={isAnalyzing}
             >
-              <ImagePlus className="w-5 h-5" />
+              <ImagePlus className="w-4 h-4 md:w-5 md:h-5" />
             </Button>
 
             {/* Text Input */}
@@ -282,7 +282,7 @@ export const NutritionAnalyzer = () => {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="min-h-[48px] max-h-32 resize-none"
+              className="min-h-[40px] md:min-h-[48px] max-h-24 md:max-h-32 resize-none text-sm md:text-base"
               disabled={isAnalyzing}
             />
 
@@ -290,42 +290,42 @@ export const NutritionAnalyzer = () => {
             <Button
               onClick={analyzeFood}
               disabled={isAnalyzing || (!query.trim() && !image)}
-              className="shrink-0 h-12 w-12"
+              className="shrink-0 h-10 w-10 md:h-12 md:w-12"
               size="icon"
             >
               {isAnalyzing ? (
-                <Loader2 className="w-5 h-5 animate-spin" />
+                <Loader2 className="w-4 h-4 md:w-5 md:h-5 animate-spin" />
               ) : (
-                <Send className="w-5 h-5" />
+                <Send className="w-4 h-4 md:w-5 md:h-5" />
               )}
             </Button>
           </div>
 
-          <p className="text-xs text-muted-foreground mt-3 text-center">
+          <p className="text-[10px] md:text-xs text-muted-foreground mt-2 md:mt-3 text-center">
             Upload food images or ask nutrition questions for instant AI analysis
           </p>
         </Card>
 
         {/* Feature Cards */}
-        <div className="grid md:grid-cols-3 gap-4 mt-12">
-          <div className="p-4 rounded-xl bg-secondary/30 border border-border text-center">
-            <Apple className="w-8 h-8 text-primary mx-auto mb-2" />
-            <h3 className="font-semibold mb-1">Food Recognition</h3>
-            <p className="text-sm text-muted-foreground">
+        <div className="grid grid-cols-3 gap-2 md:gap-4 mt-8 md:mt-12">
+          <div className="p-3 md:p-4 rounded-xl bg-secondary/30 border border-border text-center">
+            <Apple className="w-6 h-6 md:w-8 md:h-8 text-primary mx-auto mb-1 md:mb-2" />
+            <h3 className="font-semibold text-xs md:text-base mb-0.5 md:mb-1">Food Recognition</h3>
+            <p className="text-[10px] md:text-sm text-muted-foreground hidden sm:block">
               Identify foods from photos instantly
             </p>
           </div>
-          <div className="p-4 rounded-xl bg-secondary/30 border border-border text-center">
-            <Utensils className="w-8 h-8 text-primary mx-auto mb-2" />
-            <h3 className="font-semibold mb-1">Nutrition Data</h3>
-            <p className="text-sm text-muted-foreground">
+          <div className="p-3 md:p-4 rounded-xl bg-secondary/30 border border-border text-center">
+            <Utensils className="w-6 h-6 md:w-8 md:h-8 text-primary mx-auto mb-1 md:mb-2" />
+            <h3 className="font-semibold text-xs md:text-base mb-0.5 md:mb-1">Nutrition Data</h3>
+            <p className="text-[10px] md:text-sm text-muted-foreground hidden sm:block">
               Get calories, macros & micronutrients
             </p>
           </div>
-          <div className="p-4 rounded-xl bg-secondary/30 border border-border text-center">
-            <Leaf className="w-8 h-8 text-primary mx-auto mb-2" />
-            <h3 className="font-semibold mb-1">Health Tips</h3>
-            <p className="text-sm text-muted-foreground">
+          <div className="p-3 md:p-4 rounded-xl bg-secondary/30 border border-border text-center">
+            <Leaf className="w-6 h-6 md:w-8 md:h-8 text-primary mx-auto mb-1 md:mb-2" />
+            <h3 className="font-semibold text-xs md:text-base mb-0.5 md:mb-1">Health Tips</h3>
+            <p className="text-[10px] md:text-sm text-muted-foreground hidden sm:block">
               Personalized dietary recommendations
             </p>
           </div>

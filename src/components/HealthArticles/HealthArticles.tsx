@@ -157,72 +157,72 @@ export const HealthArticles = () => {
   };
 
   return (
-    <section id="blog" className="py-20 md:py-32 gradient-soft">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <Badge className="mb-4 bg-primary/10 text-primary border-0">
+    <section id="blog" className="py-12 md:py-20 lg:py-32 gradient-soft">
+      <div className="container mx-auto px-3 md:px-4">
+        <div className="max-w-4xl mx-auto text-center mb-8 md:mb-16">
+          <Badge className="mb-3 md:mb-4 bg-primary/10 text-primary border-0">
             <Star className="w-3 h-3 mr-1 fill-primary" /> Expert Verified
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-foreground">
             Health & Wellness Articles
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground">
+          <p className="text-sm md:text-lg lg:text-xl text-muted-foreground px-2">
             Expert-verified guides, tips, and insights from certified health professionals. 
             Follow your favorite authors and join the health community.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-7xl mx-auto">
           {articles.map((article, index) => (
             <Card
               key={article.id}
               className="overflow-hidden border-0 shadow-soft hover-lift group cursor-pointer animate-fade-in"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="relative h-56 overflow-hidden">
+              <div className="relative h-40 sm:h-48 md:h-56 overflow-hidden">
                 <img
                   src={article.image}
                   alt={article.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-smooth"
                 />
-                <div className="absolute top-4 left-4">
-                  <Badge className="bg-primary/90 text-primary-foreground backdrop-blur-sm">
+                <div className="absolute top-2 md:top-4 left-2 md:left-4">
+                  <Badge className="bg-primary/90 text-primary-foreground backdrop-blur-sm text-xs">
                     {article.category}
                   </Badge>
                 </div>
-                <div className="absolute top-4 right-4 flex gap-2">
+                <div className="absolute top-2 md:top-4 right-2 md:right-4 flex gap-2">
                   <button
                     onClick={(e) => { e.stopPropagation(); toggleSave(article.id); }}
-                    className={`p-2 rounded-full bg-background/80 backdrop-blur-sm transition-colors ${
+                    className={`p-1.5 md:p-2 rounded-full bg-background/80 backdrop-blur-sm transition-colors ${
                       savedArticles.includes(article.id) ? 'text-primary' : 'text-muted-foreground hover:text-primary'
                     }`}
                   >
-                    <Bookmark className={`w-4 h-4 ${savedArticles.includes(article.id) ? 'fill-current' : ''}`} />
+                    <Bookmark className={`w-3 h-3 md:w-4 md:h-4 ${savedArticles.includes(article.id) ? 'fill-current' : ''}`} />
                   </button>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent opacity-0 group-hover:opacity-100 transition-smooth"></div>
               </div>
 
-              <div className="p-6">
+              <div className="p-3 md:p-4 lg:p-6">
                 {/* Author Section */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <Avatar className="h-10 w-10">
+                <div className="flex items-center justify-between mb-3 md:mb-4">
+                  <div className="flex items-center gap-2 md:gap-3 min-w-0">
+                    <Avatar className="h-8 w-8 md:h-10 md:w-10 shrink-0">
                       <AvatarImage src={article.author.avatar} />
-                      <AvatarFallback className="bg-primary/10 text-primary">
+                      <AvatarFallback className="bg-primary/10 text-primary text-xs">
                         {article.author.name.split(' ').map(n => n[0]).join('')}
                       </AvatarFallback>
                     </Avatar>
-                    <div>
+                    <div className="min-w-0">
                       <div className="flex items-center gap-1">
-                        <span className="font-medium text-sm">{article.author.name}</span>
+                        <span className="font-medium text-xs md:text-sm truncate">{article.author.name}</span>
                         {article.author.verified && (
-                          <Badge variant="secondary" className="h-4 w-4 p-0 rounded-full bg-blue-500">
-                            <Star className="h-3 w-3 text-white fill-white" />
+                          <Badge variant="secondary" className="h-3 w-3 md:h-4 md:w-4 p-0 rounded-full bg-blue-500 shrink-0">
+                            <Star className="h-2 w-2 md:h-3 md:w-3 text-white fill-white" />
                           </Badge>
                         )}
                       </div>
-                      <span className="text-xs text-muted-foreground">
+                      <span className="text-[10px] md:text-xs text-muted-foreground">
                         {formatNumber(article.author.followers)} followers
                       </span>
                     </div>
@@ -230,7 +230,7 @@ export const HealthArticles = () => {
                   <Button
                     variant={followedAuthors.includes(article.author.name) ? "secondary" : "outline"}
                     size="sm"
-                    className="h-8"
+                    className="h-7 md:h-8 text-xs shrink-0"
                     onClick={(e) => { e.stopPropagation(); toggleFollow(article.author.name); }}
                   >
                     {followedAuthors.includes(article.author.name) ? (
@@ -244,69 +244,69 @@ export const HealthArticles = () => {
                   </Button>
                 </div>
 
-                <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
+                <div className="flex items-center gap-2 md:gap-4 text-[10px] md:text-sm text-muted-foreground mb-2 md:mb-3">
                   <div className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
+                    <Calendar className="w-3 h-3 md:w-4 md:h-4" />
                     <span>{article.date}</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <Clock className="w-4 h-4" />
+                    <Clock className="w-3 h-3 md:w-4 md:h-4" />
                     <span>{article.readTime}</span>
                   </div>
                 </div>
 
-                <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-smooth line-clamp-2">
+                <h3 className="text-sm md:text-lg lg:text-xl font-bold text-foreground mb-2 md:mb-3 group-hover:text-primary transition-smooth line-clamp-2">
                   {article.title}
                 </h3>
 
-                <p className="text-muted-foreground mb-4 line-clamp-2">
+                <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4 line-clamp-2">
                   {article.excerpt}
                 </p>
 
                 {/* Engagement Stats */}
-                <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
+                <div className="flex items-center gap-2 md:gap-4 text-[10px] md:text-sm text-muted-foreground mb-3 md:mb-4">
                   <div className="flex items-center gap-1">
-                    <Eye className="w-4 h-4" />
+                    <Eye className="w-3 h-3 md:w-4 md:h-4" />
                     <span>{formatNumber(article.views)}</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <ThumbsUp className="w-4 h-4" />
+                    <ThumbsUp className="w-3 h-3 md:w-4 md:h-4" />
                     <span>{formatNumber(article.likes + (likedArticles.includes(article.id) ? 1 : 0))}</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <MessageSquare className="w-4 h-4" />
+                    <MessageSquare className="w-3 h-3 md:w-4 md:h-4" />
                     <span>{article.comments}</span>
                   </div>
                 </div>
 
                 {/* Actions */}
-                <div className="flex items-center justify-between pt-4 border-t border-border">
-                  <div className="flex items-center gap-2">
+                <div className="flex items-center justify-between pt-3 md:pt-4 border-t border-border">
+                  <div className="flex items-center gap-1">
                     <Button
                       variant="ghost"
                       size="sm"
-                      className={`h-9 ${likedArticles.includes(article.id) ? 'text-red-500' : ''}`}
+                      className={`h-7 md:h-9 px-2 text-xs ${likedArticles.includes(article.id) ? 'text-red-500' : ''}`}
                       onClick={(e) => { e.stopPropagation(); toggleLike(article.id); }}
                     >
-                      <Heart className={`w-4 h-4 mr-1 ${likedArticles.includes(article.id) ? 'fill-current' : ''}`} />
-                      Like
+                      <Heart className={`w-3 h-3 md:w-4 md:h-4 mr-1 ${likedArticles.includes(article.id) ? 'fill-current' : ''}`} />
+                      <span className="hidden sm:inline">Like</span>
                     </Button>
-                    <Button variant="ghost" size="sm" className="h-9">
-                      <MessageCircle className="w-4 h-4 mr-1" />
-                      Comment
+                    <Button variant="ghost" size="sm" className="h-7 md:h-9 px-2 text-xs">
+                      <MessageCircle className="w-3 h-3 md:w-4 md:h-4 mr-1" />
+                      <span className="hidden sm:inline">Comment</span>
                     </Button>
                     <div className="relative">
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="h-9"
+                        className="h-7 md:h-9 px-2 text-xs"
                         onClick={(e) => {
                           e.stopPropagation();
                           setShareOpenIndex(shareOpenIndex === index ? null : index);
                         }}
                       >
-                        <Share2 className="w-4 h-4 mr-1" />
-                        Share
+                        <Share2 className="w-3 h-3 md:w-4 md:h-4 mr-1" />
+                        <span className="hidden sm:inline">Share</span>
                       </Button>
                       
                       {shareOpenIndex === index && (
@@ -314,51 +314,51 @@ export const HealthArticles = () => {
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="h-8 w-8 hover:bg-blue-500/10 hover:text-blue-500"
+                            className="h-7 w-7 md:h-8 md:w-8 hover:bg-blue-500/10 hover:text-blue-500"
                             onClick={(e) => {
                               e.stopPropagation();
                               shareArticle("facebook", article);
                             }}
                           >
-                            <Facebook className="w-4 h-4" />
+                            <Facebook className="w-3 h-3 md:w-4 md:h-4" />
                           </Button>
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="h-8 w-8 hover:bg-sky-500/10 hover:text-sky-500"
+                            className="h-7 w-7 md:h-8 md:w-8 hover:bg-sky-500/10 hover:text-sky-500"
                             onClick={(e) => {
                               e.stopPropagation();
                               shareArticle("twitter", article);
                             }}
                           >
-                            <Twitter className="w-4 h-4" />
+                            <Twitter className="w-3 h-3 md:w-4 md:h-4" />
                           </Button>
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="h-8 w-8 hover:bg-green-500/10 hover:text-green-500"
+                            className="h-7 w-7 md:h-8 md:w-8 hover:bg-green-500/10 hover:text-green-500"
                             onClick={(e) => {
                               e.stopPropagation();
                               shareArticle("whatsapp", article);
                             }}
                           >
-                            <MessageCircle className="w-4 h-4" />
+                            <MessageCircle className="w-3 h-3 md:w-4 md:h-4" />
                           </Button>
                         </div>
                       )}
                     </div>
                   </div>
-                  <ArrowRight className="w-5 h-5 text-primary group-hover:translate-x-1 transition-smooth" />
+                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5 text-primary group-hover:translate-x-1 transition-smooth" />
                 </div>
               </div>
             </Card>
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        <div className="text-center mt-8 md:mt-12">
           <Button variant="outline" size="lg" className="gap-2">
             View All Articles
-            <ArrowRight className="w-5 h-5" />
+            <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
           </Button>
         </div>
       </div>

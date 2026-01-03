@@ -130,47 +130,47 @@ export const LifestyleChat = () => {
   ];
 
   return (
-    <section className="py-20 md:py-32">
-      <div className="container mx-auto px-4 max-w-4xl">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary mb-4">
+    <section className="py-8 md:py-20 lg:py-32">
+      <div className="container mx-auto px-3 md:px-4 max-w-4xl">
+        <div className="text-center mb-6 md:mb-12">
+          <div className="inline-flex items-center gap-2 px-3 md:px-4 py-2 bg-primary/10 rounded-full text-primary mb-3 md:mb-4">
             <Sparkles className="w-4 h-4" />
-            <span className="text-sm font-medium">AI Wellness Coach</span>
+            <span className="text-xs md:text-sm font-medium">AI Wellness Coach</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 gradient-text">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 gradient-text">
             Lifestyle & Wellness
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto px-2">
             Get personalized advice on exercise, sleep, stress management, and building healthy habits.
           </p>
         </div>
 
         {/* Lifestyle Icons */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mb-6 md:mb-8">
           {lifestyleIcons.map((item, idx) => (
-            <div key={idx} className="p-4 rounded-xl bg-secondary/30 border border-border text-center">
-              <item.icon className={`w-8 h-8 ${item.color} mx-auto mb-2`} />
-              <span className="text-sm font-medium">{item.label}</span>
+            <div key={idx} className="p-3 md:p-4 rounded-xl bg-secondary/30 border border-border text-center">
+              <item.icon className={`w-6 h-6 md:w-8 md:h-8 ${item.color} mx-auto mb-1 md:mb-2`} />
+              <span className="text-xs md:text-sm font-medium">{item.label}</span>
             </div>
           ))}
         </div>
 
         {/* Conversation History */}
         {conversationHistory.length > 0 && (
-          <div className="space-y-4 mb-8">
+          <div className="space-y-3 md:space-y-4 mb-6 md:mb-8 max-h-[50vh] md:max-h-[60vh] overflow-y-auto">
             {conversationHistory.map((msg, idx) => (
               <div
                 key={idx}
                 className={`flex ${msg.type === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[85%] rounded-2xl p-4 ${
+                  className={`max-w-[90%] md:max-w-[85%] rounded-2xl p-3 md:p-4 ${
                     msg.type === "user"
                       ? "bg-primary text-primary-foreground"
                       : "bg-secondary text-secondary-foreground"
                   }`}
                 >
-                  <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap">
+                  <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap text-sm md:text-base">
                     {msg.content}
                   </div>
                 </div>
@@ -179,8 +179,8 @@ export const LifestyleChat = () => {
             
             {isLoading && response && (
               <div className="flex justify-start">
-                <div className="max-w-[85%] rounded-2xl p-4 bg-secondary text-secondary-foreground">
-                  <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap">
+                <div className="max-w-[90%] md:max-w-[85%] rounded-2xl p-3 md:p-4 bg-secondary text-secondary-foreground">
+                  <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap text-sm md:text-base">
                     {response}
                   </div>
                 </div>
@@ -191,12 +191,12 @@ export const LifestyleChat = () => {
 
         {/* Suggested Questions */}
         {conversationHistory.length === 0 && (
-          <div className="grid grid-cols-2 gap-3 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3 mb-6 md:mb-8">
             {suggestedQuestions.map((q, idx) => (
               <button
                 key={idx}
                 onClick={() => setQuery(q)}
-                className="p-3 text-sm text-left bg-secondary/50 hover:bg-secondary rounded-xl transition-colors border border-border"
+                className="p-3 text-xs md:text-sm text-left bg-secondary/50 hover:bg-secondary rounded-xl transition-colors border border-border"
               >
                 {q}
               </button>
@@ -205,30 +205,30 @@ export const LifestyleChat = () => {
         )}
 
         {/* Input Area */}
-        <Card className="p-4 shadow-lg border-2 border-border/50">
-          <div className="flex items-end gap-3">
+        <Card className="p-3 md:p-4 shadow-lg border-2 border-border/50">
+          <div className="flex items-end gap-2 md:gap-3">
             <Textarea
               placeholder="Ask about exercise, sleep, stress management, habits..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="min-h-[48px] max-h-32 resize-none"
+              className="min-h-[40px] md:min-h-[48px] max-h-24 md:max-h-32 resize-none text-sm md:text-base"
               disabled={isLoading}
             />
             <Button
               onClick={askQuestion}
               disabled={isLoading || !query.trim()}
-              className="shrink-0 h-12 w-12"
+              className="shrink-0 h-10 w-10 md:h-12 md:w-12"
               size="icon"
             >
               {isLoading ? (
-                <Loader2 className="w-5 h-5 animate-spin" />
+                <Loader2 className="w-4 h-4 md:w-5 md:h-5 animate-spin" />
               ) : (
-                <Send className="w-5 h-5" />
+                <Send className="w-4 h-4 md:w-5 md:h-5" />
               )}
             </Button>
           </div>
-          <p className="text-xs text-muted-foreground mt-3 text-center">
+          <p className="text-[10px] md:text-xs text-muted-foreground mt-2 md:mt-3 text-center">
             Get personalized wellness advice and lifestyle tips
           </p>
         </Card>

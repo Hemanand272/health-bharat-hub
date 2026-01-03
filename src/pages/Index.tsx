@@ -16,6 +16,7 @@ import { AppSidebar } from "@/components/Sidebar/AppSidebar";
 import { BodySystemsChat } from "@/components/BodyHealth/BodySystemsChat";
 import { LifestyleChat } from "@/components/BodyHealth/LifestyleChat";
 import { MedicinePlatform } from "@/components/MedicinePlatform/MedicinePlatform";
+import { CommunitySection } from "@/components/Community/CommunitySection";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -23,7 +24,7 @@ const Index = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   const handleNavigate = (section: string) => {
-    const contentSections = ["body-systems-chat", "lifestyle-chat", "nutrition-analyzer", "medicine-store"];
+    const contentSections = ["body-systems-chat", "lifestyle-chat", "nutrition-analyzer", "medicine-store", "community"];
     
     if (contentSections.includes(section)) {
       setShowContent(section);
@@ -45,6 +46,7 @@ const Index = () => {
       case "lifestyle-chat": return <LifestyleChat />;
       case "nutrition-analyzer": return <NutritionAnalyzer />;
       case "medicine-store": return <MedicinePlatform />;
+      case "community": return <CommunitySection />;
       default: return null;
     }
   };
@@ -56,7 +58,7 @@ const Index = () => {
       
       <main className={cn("transition-all duration-300", sidebarCollapsed ? "lg:ml-16" : "lg:ml-64")}>
         {showContent ? (
-          <div className="pt-20 md:pt-24">{renderContentSection()}</div>
+          <div className="pt-16 md:pt-20 lg:pt-24">{renderContentSection()}</div>
         ) : (
           <>
             <Hero />
@@ -65,6 +67,7 @@ const Index = () => {
             <DoctorConsultation />
             <MedicationsCarousel />
             <HealthArticles />
+            <CommunitySection />
             <ProblemSolution />
             <Testimonials />
             <JoinForm />

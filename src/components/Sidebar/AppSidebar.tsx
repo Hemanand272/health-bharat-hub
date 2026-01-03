@@ -30,8 +30,9 @@ const menuItems = [
   { id: "consultation", label: "Doctor Consultation", icon: Stethoscope },
   { id: "medicine-store", label: "Medicine Store", icon: Pill },
   { id: "blog", label: "Health Articles", icon: BookOpen },
-  { id: "testimonials", label: "Testimonials", icon: Users },
-  { id: "join", label: "Join Community", icon: MessageSquare },
+  { id: "community", label: "Community", icon: Users },
+  { id: "testimonials", label: "Testimonials", icon: MessageSquare },
+  { id: "join", label: "Join Us", icon: MessageSquare },
 ];
 
 export const AppSidebar = ({ onNavigate, activeSection, onCollapseChange }: SidebarProps) => {

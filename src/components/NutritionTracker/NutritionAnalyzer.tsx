@@ -4,7 +4,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { 
   ImagePlus, Send, Loader2, X, Sparkles, Apple, 
-  Utensils, Leaf, Info
+  Utensils, Leaf
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -65,7 +65,6 @@ export const NutritionAnalyzer = () => {
     setIsAnalyzing(true);
     setResponse("");
 
-    // Add user message to history
     const userMessage = {
       type: "user" as const,
       content: query || "Analyze this food image",
@@ -130,13 +129,11 @@ export const NutritionAnalyzer = () => {
         }
       }
 
-      // Add assistant response to history
       setConversationHistory(prev => [...prev, {
         type: "assistant",
         content: assistantResponse,
       }]);
 
-      // Clear inputs after successful analysis
       setQuery("");
       removeImage();
     } catch (error: any) {
@@ -165,31 +162,31 @@ export const NutritionAnalyzer = () => {
   ];
 
   return (
-    <section id="nutrition-analyzer" className="py-8 md:py-20 lg:py-32">
+    <section id="nutrition-analyzer" className="py-6 md:py-16 lg:py-24 min-h-[calc(100vh-5rem)]">
       <div className="container mx-auto px-3 md:px-4 max-w-4xl">
-        <div className="text-center mb-6 md:mb-12">
-          <div className="inline-flex items-center gap-2 px-3 md:px-4 py-2 bg-primary/10 rounded-full text-primary mb-3 md:mb-4">
-            <Sparkles className="w-4 h-4" />
-            <span className="text-xs md:text-sm font-medium">AI-Powered Nutrition Analysis</span>
+        <div className="text-center mb-4 md:mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-primary/10 rounded-full text-primary mb-2 md:mb-4">
+            <Sparkles className="w-3 h-3 md:w-4 md:h-4" />
+            <span className="text-[10px] md:text-sm font-medium">AI-Powered Nutrition Analysis</span>
           </div>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 gradient-text">
+          <h2 className="text-lg md:text-3xl lg:text-4xl font-bold mb-2 md:mb-3 gradient-text">
             Analyze Your Food
           </h2>
-          <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto px-2">
-            Upload a photo of your meal or ask any nutrition question. Get instant AI-powered analysis with detailed nutritional information.
+          <p className="text-[10px] md:text-base text-muted-foreground max-w-2xl mx-auto px-2">
+            Upload a photo of your meal or ask any nutrition question for instant AI-powered analysis.
           </p>
         </div>
 
         {/* Conversation History */}
         {conversationHistory.length > 0 && (
-          <div className="space-y-3 md:space-y-4 mb-6 md:mb-8 max-h-[50vh] md:max-h-[60vh] overflow-y-auto">
+          <div className="space-y-2 md:space-y-4 mb-4 md:mb-6 max-h-[40vh] md:max-h-[50vh] overflow-y-auto scrollbar-hide">
             {conversationHistory.map((msg, idx) => (
               <div
                 key={idx}
                 className={`flex ${msg.type === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[90%] md:max-w-[85%] rounded-2xl p-3 md:p-4 ${
+                  className={`max-w-[85%] md:max-w-[80%] rounded-2xl p-2.5 md:p-4 ${
                     msg.type === "user"
                       ? "bg-primary text-primary-foreground"
                       : "bg-secondary text-secondary-foreground"
@@ -199,21 +196,20 @@ export const NutritionAnalyzer = () => {
                     <img
                       src={msg.image}
                       alt="Food"
-                      className="rounded-lg mb-2 md:mb-3 max-h-32 md:max-h-48 object-cover"
+                      className="rounded-lg mb-2 max-h-24 md:max-h-40 object-cover"
                     />
                   )}
-                  <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap text-sm md:text-base">
+                  <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap text-xs md:text-sm">
                     {msg.content}
                   </div>
                 </div>
               </div>
             ))}
             
-            {/* Current streaming response */}
             {isAnalyzing && response && (
               <div className="flex justify-start">
-                <div className="max-w-[90%] md:max-w-[85%] rounded-2xl p-3 md:p-4 bg-secondary text-secondary-foreground">
-                  <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap text-sm md:text-base">
+                <div className="max-w-[85%] md:max-w-[80%] rounded-2xl p-2.5 md:p-4 bg-secondary text-secondary-foreground">
+                  <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap text-xs md:text-sm">
                     {response}
                   </div>
                 </div>
@@ -224,12 +220,12 @@ export const NutritionAnalyzer = () => {
 
         {/* Suggested Questions */}
         {conversationHistory.length === 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-6 md:mb-8">
+          <div className="grid grid-cols-2 gap-2 mb-4 md:mb-6">
             {suggestedQuestions.map((q, idx) => (
               <button
                 key={idx}
                 onClick={() => setQuery(q)}
-                className="p-3 text-xs md:text-sm text-left bg-secondary/50 hover:bg-secondary rounded-xl transition-colors border border-border"
+                className="p-2 md:p-3 text-[10px] md:text-sm text-left bg-secondary/50 hover:bg-secondary rounded-xl transition-colors border border-border"
               >
                 {q}
               </button>
@@ -237,27 +233,26 @@ export const NutritionAnalyzer = () => {
           </div>
         )}
 
-        {/* Input Area */}
-        <Card className="p-3 md:p-4 shadow-lg border-2 border-border/50">
+        {/* Input Area with Cyberpunk Neon */}
+        <Card className="p-2.5 md:p-4 shadow-lg neon-border">
           {/* Image Preview */}
           {imagePreview && (
-            <div className="relative inline-block mb-3 md:mb-4">
+            <div className="relative inline-block mb-2 md:mb-3">
               <img
                 src={imagePreview}
                 alt="Upload preview"
-                className="max-h-24 md:max-h-32 rounded-lg object-cover"
+                className="max-h-20 md:max-h-28 rounded-lg object-cover"
               />
               <button
                 onClick={removeImage}
-                className="absolute -top-2 -right-2 p-1 bg-destructive text-destructive-foreground rounded-full hover:bg-destructive/90"
+                className="absolute -top-1.5 -right-1.5 p-0.5 md:p-1 bg-destructive text-destructive-foreground rounded-full hover:bg-destructive/90"
               >
-                <X className="w-3 h-3 md:w-4 md:h-4" />
+                <X className="w-3 h-3" />
               </button>
             </div>
           )}
 
-          <div className="flex items-end gap-2 md:gap-3">
-            {/* Image Upload Button */}
+          <div className="flex items-end gap-2">
             <input
               type="file"
               ref={fileInputRef}
@@ -270,63 +265,61 @@ export const NutritionAnalyzer = () => {
               variant="outline"
               size="icon"
               onClick={() => fileInputRef.current?.click()}
-              className="shrink-0 h-10 w-10 md:h-12 md:w-12"
+              className="shrink-0 h-9 w-9 md:h-11 md:w-11"
               disabled={isAnalyzing}
             >
-              <ImagePlus className="w-4 h-4 md:w-5 md:h-5" />
+              <ImagePlus className="w-4 h-4" />
             </Button>
 
-            {/* Text Input */}
             <Textarea
-              placeholder="Ask about nutrition or describe your meal..."
+              placeholder="Ask about nutrition..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="min-h-[40px] md:min-h-[48px] max-h-24 md:max-h-32 resize-none text-sm md:text-base"
+              className="min-h-[36px] md:min-h-[44px] max-h-20 md:max-h-28 resize-none text-xs md:text-sm"
               disabled={isAnalyzing}
             />
 
-            {/* Send Button */}
             <Button
               onClick={analyzeFood}
               disabled={isAnalyzing || (!query.trim() && !image)}
-              className="shrink-0 h-10 w-10 md:h-12 md:w-12"
+              className="shrink-0 h-9 w-9 md:h-11 md:w-11"
               size="icon"
             >
               {isAnalyzing ? (
-                <Loader2 className="w-4 h-4 md:w-5 md:h-5 animate-spin" />
+                <Loader2 className="w-4 h-4 animate-spin" />
               ) : (
-                <Send className="w-4 h-4 md:w-5 md:h-5" />
+                <Send className="w-4 h-4" />
               )}
             </Button>
           </div>
 
-          <p className="text-[10px] md:text-xs text-muted-foreground mt-2 md:mt-3 text-center">
-            Upload food images or ask nutrition questions for instant AI analysis
+          <p className="text-[8px] md:text-[10px] text-muted-foreground mt-1.5 md:mt-2 text-center">
+            Upload food images or ask nutrition questions
           </p>
         </Card>
 
         {/* Feature Cards */}
-        <div className="grid grid-cols-3 gap-2 md:gap-4 mt-8 md:mt-12">
-          <div className="p-3 md:p-4 rounded-xl bg-secondary/30 border border-border text-center">
-            <Apple className="w-6 h-6 md:w-8 md:h-8 text-primary mx-auto mb-1 md:mb-2" />
-            <h3 className="font-semibold text-xs md:text-base mb-0.5 md:mb-1">Food Recognition</h3>
-            <p className="text-[10px] md:text-sm text-muted-foreground hidden sm:block">
-              Identify foods from photos instantly
+        <div className="grid grid-cols-3 gap-2 md:gap-3 mt-4 md:mt-8">
+          <div className="p-2 md:p-3 rounded-xl bg-secondary/30 border border-border text-center">
+            <Apple className="w-5 h-5 md:w-7 md:h-7 text-primary mx-auto mb-1" />
+            <h3 className="font-semibold text-[10px] md:text-sm">Food Recognition</h3>
+            <p className="text-[8px] md:text-xs text-muted-foreground hidden sm:block">
+              Identify foods instantly
             </p>
           </div>
-          <div className="p-3 md:p-4 rounded-xl bg-secondary/30 border border-border text-center">
-            <Utensils className="w-6 h-6 md:w-8 md:h-8 text-primary mx-auto mb-1 md:mb-2" />
-            <h3 className="font-semibold text-xs md:text-base mb-0.5 md:mb-1">Nutrition Data</h3>
-            <p className="text-[10px] md:text-sm text-muted-foreground hidden sm:block">
-              Get calories, macros & micronutrients
+          <div className="p-2 md:p-3 rounded-xl bg-secondary/30 border border-border text-center">
+            <Utensils className="w-5 h-5 md:w-7 md:h-7 text-primary mx-auto mb-1" />
+            <h3 className="font-semibold text-[10px] md:text-sm">Nutrition Data</h3>
+            <p className="text-[8px] md:text-xs text-muted-foreground hidden sm:block">
+              Get calories & macros
             </p>
           </div>
-          <div className="p-3 md:p-4 rounded-xl bg-secondary/30 border border-border text-center">
-            <Leaf className="w-6 h-6 md:w-8 md:h-8 text-primary mx-auto mb-1 md:mb-2" />
-            <h3 className="font-semibold text-xs md:text-base mb-0.5 md:mb-1">Health Tips</h3>
-            <p className="text-[10px] md:text-sm text-muted-foreground hidden sm:block">
-              Personalized dietary recommendations
+          <div className="p-2 md:p-3 rounded-xl bg-secondary/30 border border-border text-center">
+            <Leaf className="w-5 h-5 md:w-7 md:h-7 text-primary mx-auto mb-1" />
+            <h3 className="font-semibold text-[10px] md:text-sm">Health Tips</h3>
+            <p className="text-[8px] md:text-xs text-muted-foreground hidden sm:block">
+              Dietary recommendations
             </p>
           </div>
         </div>

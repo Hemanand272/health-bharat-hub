@@ -58,12 +58,41 @@ const Index = () => {
       
       <main className={cn("transition-all duration-300", sidebarCollapsed ? "lg:ml-16" : "lg:ml-64")}>
         {showContent ? (
-          <div className="pt-16 md:pt-20 lg:pt-24">{renderContentSection()}</div>
+          <div className="pt-16 md:pt-20">{renderContentSection()}</div>
         ) : (
           <>
             <Hero />
             <About />
             <Features />
+            {/* Mobile Access Cards for AI sections */}
+            <section className="py-6 px-4 lg:hidden bg-gradient-to-b from-background to-secondary/20">
+              <div className="container mx-auto">
+                <h2 className="text-lg font-bold mb-4 text-center gradient-text">AI Health Tools</h2>
+                <div className="grid grid-cols-1 gap-3">
+                  <button
+                    onClick={() => handleNavigate("nutrition-analyzer")}
+                    className="p-4 rounded-xl bg-gradient-to-r from-pink-500/20 to-blue-500/20 border border-pink-500/30 text-left hover:from-pink-500/30 hover:to-blue-500/30 transition-all"
+                  >
+                    <h3 className="font-semibold text-sm mb-1">🍎 AI Food Analyzer</h3>
+                    <p className="text-xs text-muted-foreground">Analyze nutrition from food photos</p>
+                  </button>
+                  <button
+                    onClick={() => handleNavigate("body-systems-chat")}
+                    className="p-4 rounded-xl bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 text-left hover:from-purple-500/30 hover:to-pink-500/30 transition-all"
+                  >
+                    <h3 className="font-semibold text-sm mb-1">🧠 Body Systems Guide</h3>
+                    <p className="text-xs text-muted-foreground">Learn about body functions</p>
+                  </button>
+                  <button
+                    onClick={() => handleNavigate("lifestyle-chat")}
+                    className="p-4 rounded-xl bg-gradient-to-r from-green-500/20 to-blue-500/20 border border-green-500/30 text-left hover:from-green-500/30 hover:to-blue-500/30 transition-all"
+                  >
+                    <h3 className="font-semibold text-sm mb-1">🌿 Lifestyle & Wellness</h3>
+                    <p className="text-xs text-muted-foreground">Get wellness coaching</p>
+                  </button>
+                </div>
+              </div>
+            </section>
             <DoctorConsultation />
             <MedicationsCarousel />
             <HealthArticles />

@@ -37,7 +37,7 @@ const menuItems = [
 
 export const AppSidebar = ({ onNavigate, activeSection, onCollapseChange }: SidebarProps) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [expandedMenus, setExpandedMenus] = useState<string[]>([]);
+  const [expandedMenus, setExpandedMenus] = useState<string[]>(["health-guide"]);
 
   const handleCollapse = () => {
     const newCollapsed = !isCollapsed;
@@ -53,7 +53,15 @@ export const AppSidebar = ({ onNavigate, activeSection, onCollapseChange }: Side
 
   const handleItemClick = (id: string, hasSubItems: boolean) => {
     if (hasSubItems) {
-      toggleMenu(id);
+      if (isCollapsed) {
+        // When collapsed, navigate to first subitem
+        const item = menuItems.find(m => m.id === id);
+        if (item?.subItems?.[0]) {
+          onNavigate(item.subItems[0].id);
+        }
+      } else {
+        toggleMenu(id);
+      }
     } else {
       onNavigate(id);
     }
@@ -62,12 +70,12 @@ export const AppSidebar = ({ onNavigate, activeSection, onCollapseChange }: Side
   return (
     <aside 
       className={cn(
-        "fixed left-0 top-16 md:top-20 h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] bg-background border-r border-border z-40 transition-all duration-300 hidden lg:flex flex-col",
+        "fixed left-0 top-16 md:top-20 h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] bg-background border-r border-border z-40 transition-all duration-300 hidden lg:flex flex-col overflow-hidden",
         isCollapsed ? "w-16" : "w-64"
       )}
       data-collapsed={isCollapsed}
     >
-      <div className="flex-1 overflow-y-auto py-4">
+      <div className="flex-1 py-4 overflow-y-auto scrollbar-hide">
         <nav className="space-y-1 px-2">
           {menuItems.map((item) => (
             <div key={item.id}>
@@ -75,14 +83,16 @@ export const AppSidebar = ({ onNavigate, activeSection, onCollapseChange }: Side
                 onClick={() => handleItemClick(item.id, !!item.subItems)}
                 className={cn(
                   "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group",
-                  activeSection === item.id 
+                  activeSection === item.id || (item.subItems?.some(s => s.id === activeSection))
                     ? "bg-primary text-primary-foreground" 
                     : "hover:bg-secondary text-foreground"
                 )}
               >
                 <item.icon className={cn(
                   "w-5 h-5 flex-shrink-0",
-                  activeSection === item.id ? "text-primary-foreground" : "text-primary"
+                  activeSection === item.id || (item.subItems?.some(s => s.id === activeSection))
+                    ? "text-primary-foreground" 
+                    : "text-primary"
                 )} />
                 {!isCollapsed && (
                   <>

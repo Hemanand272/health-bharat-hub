@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -17,13 +18,24 @@ import { BodySystemsChat } from "@/components/BodyHealth/BodySystemsChat";
 import { LifestyleChat } from "@/components/BodyHealth/LifestyleChat";
 import { MedicinePlatform } from "@/components/MedicinePlatform/MedicinePlatform";
 import { CommunitySection } from "@/components/Community/CommunitySection";
+import { MobileBottomNav } from "@/components/Navigation/MobileBottomNav";
+import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [showContent, setShowContent] = useState<string | null>(null);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const { user, signOut } = useAuth();
+  const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleNavigate = (section: string) => {
+    if (section === "auth") {
+      navigate("/auth");
+      return;
+    }
+    
     const contentSections = ["body-systems-chat", "lifestyle-chat", "nutrition-analyzer", "medicine-store", "community"];
     
     if (contentSections.includes(section)) {
@@ -40,6 +52,22 @@ const Index = () => {
     }
   };
 
+  const handleLogout = async () => {
+    const { error } = await signOut();
+    if (error) {
+      toast({
+        title: "Error",
+        description: "Failed to sign out. Please try again.",
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Signed out",
+        description: "You have been signed out successfully.",
+      });
+    }
+  };
+
   const renderContentSection = () => {
     switch (showContent) {
       case "body-systems-chat": return <BodySystemsChat />;
@@ -52,7 +80,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pb-16 lg:pb-0">
       <Header onNavigate={handleNavigate} />
       <AppSidebar onNavigate={handleNavigate} activeSection={activeSection} onCollapseChange={setSidebarCollapsed} />
       
@@ -104,6 +132,14 @@ const Index = () => {
         )}
       </main>
       <Footer />
+      
+      {/* Mobile Bottom Navigation */}
+      <MobileBottomNav 
+        activeSection={activeSection}
+        onNavigate={handleNavigate}
+        isLoggedIn={!!user}
+        onLogout={handleLogout}
+      />
     </div>
   );
 };

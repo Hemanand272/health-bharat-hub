@@ -53,7 +53,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      <Header />
+      <Header onNavigate={handleNavigate} />
       <AppSidebar onNavigate={handleNavigate} activeSection={activeSection} onCollapseChange={setSidebarCollapsed} />
       
       <main className={cn("transition-all duration-300", sidebarCollapsed ? "lg:ml-16" : "lg:ml-64")}>

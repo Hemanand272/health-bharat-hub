@@ -1,4 +1,4 @@
-import { Home, Sparkles, Pill, Users, Heart, LogOut, User } from "lucide-react";
+import { Home, Sparkles, Pill, Users, Heart, LogOut, User, ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface MobileBottomNavProps {
@@ -11,7 +11,7 @@ interface MobileBottomNavProps {
 const navItems = [
   { id: "home", label: "Home", icon: Home },
   { id: "nutrition-analyzer", label: "AI Food", icon: Sparkles },
-  { id: "body-systems-chat", label: "Health", icon: Heart },
+  { id: "nutrition-store", label: "Order", icon: ShoppingBag },
   { id: "medicine-store", label: "Medicine", icon: Pill },
   { id: "community", label: "Community", icon: Users },
 ];

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { 
   Home, Info, Heart, Stethoscope, BookOpen, 
   Users, MessageSquare, ChevronLeft, ChevronRight, Brain,
-  Leaf, Star, Pill, Sparkles
+  Leaf, Star, Pill, Sparkles, ShoppingBag
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -18,6 +18,7 @@ const menuItems = [
   { id: "about", label: "About Us", icon: Info },
   { id: "features", label: "Features", icon: Star },
   { id: "nutrition-analyzer", label: "AI Food Analyzer", icon: Sparkles },
+  { id: "nutrition-store", label: "Order Nutrition", icon: ShoppingBag },
   { 
     id: "health-guide", 
     label: "Body Health", 

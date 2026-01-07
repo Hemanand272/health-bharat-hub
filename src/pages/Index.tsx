@@ -19,6 +19,7 @@ import { LifestyleChat } from "@/components/BodyHealth/LifestyleChat";
 import { MedicinePlatform } from "@/components/MedicinePlatform/MedicinePlatform";
 import { CommunitySection } from "@/components/Community/CommunitySection";
 import { MobileBottomNav } from "@/components/Navigation/MobileBottomNav";
+import NutritionStore from "@/components/NutritionStore/NutritionStore";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 
@@ -36,7 +37,7 @@ const Index = () => {
       return;
     }
     
-    const contentSections = ["body-systems-chat", "lifestyle-chat", "nutrition-analyzer", "medicine-store", "community"];
+    const contentSections = ["body-systems-chat", "lifestyle-chat", "nutrition-analyzer", "medicine-store", "community", "nutrition-store"];
     
     if (contentSections.includes(section)) {
       setShowContent(section);
@@ -75,6 +76,7 @@ const Index = () => {
       case "nutrition-analyzer": return <NutritionAnalyzer />;
       case "medicine-store": return <MedicinePlatform />;
       case "community": return <CommunitySection />;
+      case "nutrition-store": return <NutritionStore />;
       default: return null;
     }
   };
@@ -121,6 +123,7 @@ const Index = () => {
                 </div>
               </div>
             </section>
+            <NutritionStore />
             <DoctorConsultation />
             <MedicationsCarousel />
             <HealthArticles />

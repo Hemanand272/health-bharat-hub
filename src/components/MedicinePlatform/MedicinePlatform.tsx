@@ -3,11 +3,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   Search, ShoppingCart, Star, Package, Truck, 
   Shield, Percent, Heart, Plus, Minus, Pill,
   X, FileText, Receipt, CreditCard, Tag,
-  CheckCircle, ArrowLeft
+  CheckCircle, ArrowLeft, Stethoscope, Sparkles,
+  Baby, Eye, Brain, Bone, Droplet, Leaf
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import medications1 from "@/assets/medications-1.jpg";
@@ -16,25 +18,95 @@ import medications3 from "@/assets/medications-3.jpg";
 import medications4 from "@/assets/medications-4.jpg";
 
 const categories = [
-  "All", "Vitamins", "Pain Relief", "Immunity", "Digestive", 
-  "Skin Care", "Hair Care", "Ayurvedic", "Homeopathic"
+  { id: "All", name: "All", icon: Package },
+  { id: "Vitamins", name: "Vitamins", icon: Sparkles },
+  { id: "Pain Relief", name: "Pain Relief", icon: Pill },
+  { id: "Immunity", name: "Immunity", icon: Shield },
+  { id: "Digestive", name: "Digestive", icon: Droplet },
+  { id: "Skin Care", name: "Skin Care", icon: Heart },
+  { id: "Hair Care", name: "Hair Care", icon: Sparkles },
+  { id: "Ayurvedic", name: "Ayurvedic", icon: Leaf },
+  { id: "Eye Care", name: "Eye Care", icon: Eye },
+  { id: "Bone Health", name: "Bone Health", icon: Bone },
+  { id: "Baby Care", name: "Baby Care", icon: Baby },
+  { id: "Brain Health", name: "Brain Health", icon: Brain },
+  { id: "Devices", name: "Devices", icon: Stethoscope },
 ];
 
 const medicineImages = [medications1, medications2, medications3, medications4];
 
 const medicines = [
+  // Vitamins
   { id: 1, name: "Vitamin D3 2000 IU", brand: "HealthFirst", price: 299, mrp: 399, rating: 4.8, reviews: 2345, category: "Vitamins", imageIndex: 0, prescription: false, discount: 25 },
   { id: 2, name: "Omega-3 Fish Oil Capsules", brand: "NaturePlus", price: 449, mrp: 599, rating: 4.7, reviews: 1876, category: "Vitamins", imageIndex: 1, prescription: false, discount: 25 },
-  { id: 3, name: "Paracetamol 500mg", brand: "MediCare", price: 35, mrp: 45, rating: 4.9, reviews: 5432, category: "Pain Relief", imageIndex: 3, prescription: false, discount: 22 },
-  { id: 4, name: "Immunity Booster Tablets", brand: "AyurVeda", price: 399, mrp: 499, rating: 4.6, reviews: 987, category: "Immunity", imageIndex: 2, prescription: false, discount: 20 },
-  { id: 5, name: "Probiotics 50 Billion CFU", brand: "GutHealth", price: 599, mrp: 799, rating: 4.5, reviews: 765, category: "Digestive", imageIndex: 3, prescription: false, discount: 25 },
-  { id: 6, name: "Biotin 10000mcg", brand: "HairGlow", price: 349, mrp: 449, rating: 4.7, reviews: 2134, category: "Hair Care", imageIndex: 0, prescription: false, discount: 22 },
-  { id: 7, name: "Ashwagandha Capsules", brand: "HerbNature", price: 279, mrp: 399, rating: 4.8, reviews: 3456, category: "Ayurvedic", imageIndex: 2, prescription: false, discount: 30 },
-  { id: 8, name: "Vitamin C 1000mg", brand: "CitrusPower", price: 199, mrp: 299, rating: 4.9, reviews: 4567, category: "Immunity", imageIndex: 3, prescription: false, discount: 33 },
   { id: 9, name: "Multivitamin for Men", brand: "ManPower", price: 549, mrp: 699, rating: 4.6, reviews: 1234, category: "Vitamins", imageIndex: 3, prescription: false, discount: 21 },
-  { id: 10, name: "Aloe Vera Gel", brand: "SkinCare Pro", price: 149, mrp: 199, rating: 4.7, reviews: 2567, category: "Skin Care", imageIndex: 2, prescription: false, discount: 25 },
-  { id: 11, name: "Triphala Churna", brand: "VedicHerbs", price: 129, mrp: 179, rating: 4.8, reviews: 1890, category: "Ayurvedic", imageIndex: 2, prescription: false, discount: 28 },
   { id: 12, name: "Zinc Tablets 50mg", brand: "MineralMax", price: 179, mrp: 249, rating: 4.5, reviews: 876, category: "Immunity", imageIndex: 0, prescription: false, discount: 28 },
+  { id: 13, name: "Vitamin B12 1500mcg", brand: "NeuroVita", price: 329, mrp: 449, rating: 4.7, reviews: 1567, category: "Vitamins", imageIndex: 2, prescription: false, discount: 27 },
+  { id: 14, name: "Vitamin E 400 IU", brand: "SkinGlow", price: 249, mrp: 349, rating: 4.6, reviews: 987, category: "Vitamins", imageIndex: 1, prescription: false, discount: 29 },
+  { id: 15, name: "Folic Acid 5mg", brand: "FemCare", price: 129, mrp: 179, rating: 4.8, reviews: 2134, category: "Vitamins", imageIndex: 0, prescription: false, discount: 28 },
+  
+  // Pain Relief
+  { id: 3, name: "Paracetamol 500mg", brand: "MediCare", price: 35, mrp: 45, rating: 4.9, reviews: 5432, category: "Pain Relief", imageIndex: 3, prescription: false, discount: 22 },
+  { id: 16, name: "Ibuprofen 400mg", brand: "PainAway", price: 49, mrp: 65, rating: 4.8, reviews: 3421, category: "Pain Relief", imageIndex: 2, prescription: false, discount: 25 },
+  { id: 17, name: "Diclofenac Gel", brand: "JointFlex", price: 149, mrp: 199, rating: 4.7, reviews: 1876, category: "Pain Relief", imageIndex: 1, prescription: false, discount: 25 },
+  { id: 18, name: "Muscle Relaxant Spray", brand: "RelaxMuscle", price: 179, mrp: 249, rating: 4.5, reviews: 1234, category: "Pain Relief", imageIndex: 0, prescription: false, discount: 28 },
+  
+  // Immunity
+  { id: 4, name: "Immunity Booster Tablets", brand: "AyurVeda", price: 399, mrp: 499, rating: 4.6, reviews: 987, category: "Immunity", imageIndex: 2, prescription: false, discount: 20 },
+  { id: 8, name: "Vitamin C 1000mg", brand: "CitrusPower", price: 199, mrp: 299, rating: 4.9, reviews: 4567, category: "Immunity", imageIndex: 3, prescription: false, discount: 33 },
+  { id: 19, name: "Elderberry Extract", brand: "BerryBoost", price: 449, mrp: 599, rating: 4.7, reviews: 876, category: "Immunity", imageIndex: 1, prescription: false, discount: 25 },
+  { id: 20, name: "Echinacea Capsules", brand: "HerbShield", price: 279, mrp: 379, rating: 4.6, reviews: 654, category: "Immunity", imageIndex: 2, prescription: false, discount: 26 },
+  
+  // Digestive
+  { id: 5, name: "Probiotics 50 Billion CFU", brand: "GutHealth", price: 599, mrp: 799, rating: 4.5, reviews: 765, category: "Digestive", imageIndex: 3, prescription: false, discount: 25 },
+  { id: 21, name: "Digestive Enzymes", brand: "DigestPro", price: 349, mrp: 449, rating: 4.6, reviews: 1234, category: "Digestive", imageIndex: 0, prescription: false, discount: 22 },
+  { id: 22, name: "Fiber Supplement", brand: "FiberPlus", price: 249, mrp: 329, rating: 4.5, reviews: 876, category: "Digestive", imageIndex: 1, prescription: false, discount: 24 },
+  { id: 23, name: "Antacid Tablets", brand: "AcidRelief", price: 89, mrp: 129, rating: 4.8, reviews: 3456, category: "Digestive", imageIndex: 2, prescription: false, discount: 31 },
+  
+  // Hair Care
+  { id: 6, name: "Biotin 10000mcg", brand: "HairGlow", price: 349, mrp: 449, rating: 4.7, reviews: 2134, category: "Hair Care", imageIndex: 0, prescription: false, discount: 22 },
+  { id: 24, name: "Hair Growth Serum", brand: "FolliCare", price: 599, mrp: 799, rating: 4.6, reviews: 1567, category: "Hair Care", imageIndex: 1, prescription: false, discount: 25 },
+  { id: 25, name: "Keratin Supplements", brand: "KeratinPlus", price: 449, mrp: 599, rating: 4.5, reviews: 987, category: "Hair Care", imageIndex: 2, prescription: false, discount: 25 },
+  
+  // Ayurvedic
+  { id: 7, name: "Ashwagandha Capsules", brand: "HerbNature", price: 279, mrp: 399, rating: 4.8, reviews: 3456, category: "Ayurvedic", imageIndex: 2, prescription: false, discount: 30 },
+  { id: 11, name: "Triphala Churna", brand: "VedicHerbs", price: 129, mrp: 179, rating: 4.8, reviews: 1890, category: "Ayurvedic", imageIndex: 2, prescription: false, discount: 28 },
+  { id: 26, name: "Brahmi Capsules", brand: "MindHerbs", price: 249, mrp: 349, rating: 4.7, reviews: 1234, category: "Ayurvedic", imageIndex: 0, prescription: false, discount: 29 },
+  { id: 27, name: "Tulsi Drops", brand: "AyurLife", price: 149, mrp: 199, rating: 4.9, reviews: 2345, category: "Ayurvedic", imageIndex: 1, prescription: false, discount: 25 },
+  { id: 28, name: "Shilajit Capsules", brand: "VitalHerbs", price: 499, mrp: 699, rating: 4.6, reviews: 876, category: "Ayurvedic", imageIndex: 3, prescription: false, discount: 29 },
+  
+  // Skin Care
+  { id: 10, name: "Aloe Vera Gel", brand: "SkinCare Pro", price: 149, mrp: 199, rating: 4.7, reviews: 2567, category: "Skin Care", imageIndex: 2, prescription: false, discount: 25 },
+  { id: 29, name: "Collagen Peptides", brand: "GlowSkin", price: 799, mrp: 999, rating: 4.8, reviews: 1567, category: "Skin Care", imageIndex: 0, prescription: false, discount: 20 },
+  { id: 30, name: "Hyaluronic Acid Serum", brand: "HydraGlow", price: 549, mrp: 749, rating: 4.7, reviews: 1234, category: "Skin Care", imageIndex: 1, prescription: false, discount: 27 },
+  { id: 31, name: "Vitamin C Face Serum", brand: "BrightFace", price: 399, mrp: 549, rating: 4.8, reviews: 2345, category: "Skin Care", imageIndex: 3, prescription: false, discount: 27 },
+  
+  // Eye Care
+  { id: 32, name: "Lutein Eye Support", brand: "VisionPlus", price: 449, mrp: 599, rating: 4.6, reviews: 876, category: "Eye Care", imageIndex: 0, prescription: false, discount: 25 },
+  { id: 33, name: "Eye Drops Lubricant", brand: "ClearVision", price: 149, mrp: 199, rating: 4.8, reviews: 3456, category: "Eye Care", imageIndex: 1, prescription: false, discount: 25 },
+  { id: 34, name: "Bilberry Extract", brand: "EyeHerb", price: 349, mrp: 449, rating: 4.5, reviews: 654, category: "Eye Care", imageIndex: 2, prescription: false, discount: 22 },
+  
+  // Bone Health
+  { id: 35, name: "Calcium + D3 Tablets", brand: "BoneStrong", price: 299, mrp: 399, rating: 4.7, reviews: 2134, category: "Bone Health", imageIndex: 3, prescription: false, discount: 25 },
+  { id: 36, name: "Glucosamine Chondroitin", brand: "JointCare", price: 599, mrp: 799, rating: 4.6, reviews: 1567, category: "Bone Health", imageIndex: 0, prescription: false, discount: 25 },
+  { id: 37, name: "Vitamin K2 MK7", brand: "BoneHealth", price: 399, mrp: 549, rating: 4.5, reviews: 876, category: "Bone Health", imageIndex: 1, prescription: false, discount: 27 },
+  
+  // Baby Care
+  { id: 38, name: "Baby Vitamin D Drops", brand: "BabyCare", price: 299, mrp: 399, rating: 4.9, reviews: 1876, category: "Baby Care", imageIndex: 2, prescription: false, discount: 25 },
+  { id: 39, name: "Infant Probiotics", brand: "TinyTummy", price: 449, mrp: 599, rating: 4.8, reviews: 1234, category: "Baby Care", imageIndex: 3, prescription: false, discount: 25 },
+  { id: 40, name: "Baby Gripe Water", brand: "GentleCare", price: 149, mrp: 199, rating: 4.7, reviews: 2345, category: "Baby Care", imageIndex: 0, prescription: false, discount: 25 },
+  
+  // Brain Health
+  { id: 41, name: "Omega-3 DHA 1000mg", brand: "BrainPower", price: 549, mrp: 699, rating: 4.7, reviews: 1567, category: "Brain Health", imageIndex: 1, prescription: false, discount: 21 },
+  { id: 42, name: "Ginkgo Biloba Extract", brand: "MindBoost", price: 349, mrp: 449, rating: 4.6, reviews: 987, category: "Brain Health", imageIndex: 2, prescription: false, discount: 22 },
+  { id: 43, name: "Lion's Mane Mushroom", brand: "NeuroCap", price: 599, mrp: 799, rating: 4.8, reviews: 654, category: "Brain Health", imageIndex: 3, prescription: false, discount: 25 },
+  
+  // Healthcare Devices
+  { id: 44, name: "Digital Thermometer", brand: "MediTemp", price: 299, mrp: 399, rating: 4.8, reviews: 3456, category: "Devices", imageIndex: 0, prescription: false, discount: 25 },
+  { id: 45, name: "Blood Pressure Monitor", brand: "BPTrack", price: 1499, mrp: 1999, rating: 4.7, reviews: 2134, category: "Devices", imageIndex: 1, prescription: false, discount: 25 },
+  { id: 46, name: "Pulse Oximeter", brand: "OxiCheck", price: 799, mrp: 999, rating: 4.9, reviews: 4567, category: "Devices", imageIndex: 2, prescription: false, discount: 20 },
+  { id: 47, name: "Glucometer Kit", brand: "SugarCheck", price: 999, mrp: 1299, rating: 4.6, reviews: 1876, category: "Devices", imageIndex: 3, prescription: false, discount: 23 },
+  { id: 48, name: "Nebulizer Machine", brand: "BreathEasy", price: 1799, mrp: 2499, rating: 4.7, reviews: 987, category: "Devices", imageIndex: 0, prescription: false, discount: 28 },
 ];
 
 interface CartItem {
@@ -180,7 +252,6 @@ export const MedicinePlatform = () => {
           </Button>
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
-            {/* Order Items */}
             <div className="lg:col-span-2 space-y-3 md:space-y-4">
               <Card className="p-3 md:p-4">
                 <h3 className="font-semibold text-base md:text-lg mb-3 md:mb-4 flex items-center gap-2">
@@ -205,7 +276,6 @@ export const MedicinePlatform = () => {
                 </div>
               </Card>
 
-              {/* Coupon Section */}
               <Card className="p-3 md:p-4">
                 <h3 className="font-semibold text-base md:text-lg mb-3 flex items-center gap-2">
                   <Tag className="w-4 h-4 md:w-5 md:h-5 text-primary" />
@@ -247,7 +317,6 @@ export const MedicinePlatform = () => {
               </Card>
             </div>
 
-            {/* Invoice / Billing */}
             <div className="space-y-3 md:space-y-4">
               <Card className="p-3 md:p-4">
                 <h3 className="font-semibold text-base md:text-lg mb-3 md:mb-4 flex items-center gap-2">
@@ -362,8 +431,8 @@ export const MedicinePlatform = () => {
                     </div>
                   ))}
                 </div>
-                
-                <div className="border-t border-border pt-4 space-y-2">
+
+                <div className="border-t border-border pt-3 md:pt-4 space-y-2">
                   <div className="flex justify-between text-xs md:text-sm">
                     <span className="text-muted-foreground">Subtotal</span>
                     <span className="font-medium">₹{subtotal}</span>
@@ -372,14 +441,24 @@ export const MedicinePlatform = () => {
                     <span>Savings</span>
                     <span>-₹{productDiscount}</span>
                   </div>
-                  <div className="flex justify-between font-bold text-sm md:text-base pt-2 border-t border-border">
+                  <div className="flex justify-between text-xs md:text-sm">
+                    <span className="text-muted-foreground">Delivery</span>
+                    <span className={deliveryFee === 0 ? "text-green-600" : ""}>
+                      {deliveryFee === 0 ? "FREE" : `₹${deliveryFee}`}
+                    </span>
+                  </div>
+                  <div className="flex justify-between font-bold text-base md:text-lg pt-2 border-t border-border">
                     <span>Total</span>
-                    <span>₹{subtotal}</span>
+                    <span>₹{finalTotal}</span>
                   </div>
                 </div>
-                
-                <Button className="w-full mt-4 h-10 md:h-12 text-sm md:text-base" onClick={() => setShowCheckout(true)}>
+
+                <Button 
+                  className="w-full mt-4 h-10 md:h-12 gap-2 text-sm md:text-base" 
+                  onClick={() => setShowCheckout(true)}
+                >
                   Proceed to Checkout
+                  <ArrowLeft className="w-4 h-4 rotate-180" />
                 </Button>
               </>
             )}
@@ -389,164 +468,183 @@ export const MedicinePlatform = () => {
     );
   }
 
+  // Main Store UI
   return (
-    <section className="py-8 md:py-16 lg:py-24 bg-gradient-to-b from-background to-secondary/20">
+    <section className="py-8 md:py-12 bg-gradient-to-b from-background to-secondary/20 min-h-screen">
       <div className="container mx-auto px-3 md:px-4">
         {/* Header */}
-        <div className="text-center mb-6 md:mb-10">
-          <div className="inline-flex items-center gap-2 px-3 md:px-4 py-2 bg-primary/10 rounded-full text-primary mb-3">
-            <Pill className="w-4 h-4" />
-            <span className="text-xs md:text-sm font-medium">Medicine & Health Store</span>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 md:mb-8">
+          <div>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 flex items-center gap-2">
+              <Pill className="h-6 w-6 md:h-8 md:w-8 text-primary" />
+              Medicine Store
+            </h2>
+            <p className="text-sm md:text-base text-muted-foreground">
+              Genuine medicines & healthcare products at best prices
+            </p>
           </div>
-          <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mb-2 md:mb-3 gradient-text">
-            Order Medicines Online
-          </h2>
-          <p className="text-xs md:text-base text-muted-foreground max-w-2xl mx-auto px-2">
-            Browse, research, and order genuine medicines with great discounts.
-          </p>
-        </div>
-
-        {/* Trust Badges */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-5 md:mb-6">
-          <div className="flex items-center gap-2 p-2 md:p-3 bg-secondary/30 rounded-xl border border-border">
-            <Shield className="w-5 h-5 md:w-6 md:h-6 text-green-500 shrink-0" />
-            <div>
-              <p className="font-semibold text-[10px] md:text-xs">100% Genuine</p>
-              <p className="text-[8px] md:text-[10px] text-muted-foreground hidden sm:block">Verified products</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 p-2 md:p-3 bg-secondary/30 rounded-xl border border-border">
-            <Truck className="w-5 h-5 md:w-6 md:h-6 text-blue-500 shrink-0" />
-            <div>
-              <p className="font-semibold text-[10px] md:text-xs">Fast Delivery</p>
-              <p className="text-[8px] md:text-[10px] text-muted-foreground hidden sm:block">Within 24-48 hrs</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 p-2 md:p-3 bg-secondary/30 rounded-xl border border-border">
-            <Percent className="w-5 h-5 md:w-6 md:h-6 text-orange-500 shrink-0" />
-            <div>
-              <p className="font-semibold text-[10px] md:text-xs">Best Prices</p>
-              <p className="text-[8px] md:text-[10px] text-muted-foreground hidden sm:block">Up to 50% off</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 p-2 md:p-3 bg-secondary/30 rounded-xl border border-border">
-            <Package className="w-5 h-5 md:w-6 md:h-6 text-purple-500 shrink-0" />
-            <div>
-              <p className="font-semibold text-[10px] md:text-xs">Free Returns</p>
-              <p className="text-[8px] md:text-[10px] text-muted-foreground hidden sm:block">Easy returns</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Search and Cart */}
-        <div className="flex flex-col sm:flex-row gap-2 md:gap-3 mb-4 md:mb-6">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <Input
-              placeholder="Search medicines..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 h-9 md:h-10 text-sm"
-            />
-          </div>
-          <Button variant="outline" className="h-9 md:h-10 gap-2 relative" onClick={() => setShowCart(true)}>
+          
+          <Button 
+            variant="outline" 
+            className="relative gap-2 shrink-0" 
+            onClick={() => setShowCart(true)}
+          >
             <ShoppingCart className="w-4 h-4" />
-            <span className="text-xs md:text-sm">Cart</span>
+            Cart
             {cartCount > 0 && (
-              <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center text-[10px]">
+              <Badge className="absolute -top-2 -right-2 h-5 w-5 p-0 flex items-center justify-center text-xs">
                 {cartCount}
               </Badge>
-            )}
-            {subtotal > 0 && (
-              <span className="font-semibold text-xs md:text-sm">₹{subtotal}</span>
             )}
           </Button>
         </div>
 
-        {/* Categories */}
-        <div className="flex gap-2 mb-4 md:mb-6 overflow-x-auto pb-2 scrollbar-hide">
-          {categories.map((cat) => (
-            <Button
-              key={cat}
-              variant={selectedCategory === cat ? "default" : "outline"}
-              size="sm"
-              onClick={() => setSelectedCategory(cat)}
-              className="whitespace-nowrap text-[10px] md:text-xs h-7 md:h-8"
-            >
-              {cat}
-            </Button>
+        {/* Trust Badges */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mb-6">
+          {[
+            { icon: Shield, text: "100% Genuine", sub: "Certified Products" },
+            { icon: Truck, text: "Fast Delivery", sub: "Within 24 Hours" },
+            { icon: Percent, text: "Best Prices", sub: "Up to 50% Off" },
+            { icon: Package, text: "Easy Returns", sub: "7 Days Policy" },
+          ].map((item, i) => (
+            <div key={i} className="p-3 md:p-4 rounded-xl bg-secondary/30 border border-border text-center">
+              <item.icon className="w-6 h-6 md:w-8 md:h-8 text-primary mx-auto mb-2" />
+              <p className="text-xs md:text-sm font-semibold">{item.text}</p>
+              <p className="text-[10px] md:text-xs text-muted-foreground">{item.sub}</p>
+            </div>
           ))}
         </div>
 
+        {/* Search */}
+        <div className="relative mb-6">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <Input
+            placeholder="Search medicines, brands, categories..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-10 h-11 md:h-12 text-sm md:text-base"
+          />
+        </div>
+
+        {/* Category Tabs */}
+        <div className="mb-6 overflow-x-auto scrollbar-hide">
+          <div className="flex gap-2 min-w-max pb-2">
+            {categories.map((cat) => {
+              const Icon = cat.icon;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                    selectedCategory === cat.id
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-secondary/50 hover:bg-secondary"
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                  {cat.name}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Results */}
+        <p className="text-sm text-muted-foreground mb-4">
+          Showing {filteredMedicines.length} products
+        </p>
+
         {/* Products Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
-          {filteredMedicines.map((med) => (
-            <Card key={med.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 group">
-              <CardContent className="p-2 md:p-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4">
+          {filteredMedicines.map((med) => {
+            const cartQty = getCartQuantity(med.id);
+            const isWishlisted = wishlist.includes(med.id);
+            
+            return (
+              <Card key={med.id} className="overflow-hidden hover:shadow-lg transition-all duration-300">
                 <div className="relative">
-                  <div className="aspect-square rounded-lg mb-2 overflow-hidden">
-                    <img 
-                      src={medicineImages[med.imageIndex]} 
-                      alt={med.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <Badge className="absolute top-1 left-1 bg-green-500 text-[10px] md:text-xs">
-                    {med.discount}% OFF
-                  </Badge>
-                  <button
+                  <img 
+                    src={medicineImages[med.imageIndex]} 
+                    alt={med.name}
+                    className="w-full aspect-square object-cover"
+                  />
+                  <button 
                     onClick={() => toggleWishlist(med.id)}
-                    className="absolute top-1 right-1 p-1 md:p-1.5 rounded-full bg-background/80 hover:bg-background transition-colors"
+                    className="absolute top-2 right-2 p-1.5 rounded-full bg-background/80 backdrop-blur-sm"
                   >
-                    <Heart 
-                      className={`w-3 h-3 md:w-4 md:h-4 ${wishlist.includes(med.id) ? 'fill-red-500 text-red-500' : 'text-muted-foreground'}`} 
-                    />
+                    <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-red-500 text-red-500' : 'text-muted-foreground'}`} />
                   </button>
+                  {med.discount > 0 && (
+                    <Badge className="absolute top-2 left-2 bg-green-600 text-white">
+                      {med.discount}% OFF
+                    </Badge>
+                  )}
                 </div>
-
-                <div className="space-y-1">
-                  <p className="text-[9px] md:text-[10px] text-primary font-medium">{med.brand}</p>
-                  <h3 className="font-semibold text-[10px] md:text-xs line-clamp-2 group-hover:text-primary transition-colors">
-                    {med.name}
-                  </h3>
+                
+                <CardContent className="p-3">
+                  <p className="text-[10px] md:text-xs text-muted-foreground mb-1">{med.brand}</p>
+                  <h3 className="font-medium text-xs md:text-sm line-clamp-2 mb-2 min-h-[2.5rem]">{med.name}</h3>
                   
-                  <div className="flex items-center gap-1">
-                    <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                    <span className="text-[10px]">{med.rating}</span>
-                    <span className="text-[9px] text-muted-foreground">({med.reviews})</span>
+                  <div className="flex items-center gap-1 mb-2">
+                    <div className="flex items-center gap-0.5 bg-green-600 text-white px-1.5 py-0.5 rounded text-[10px]">
+                      <Star className="w-3 h-3 fill-white" />
+                      {med.rating}
+                    </div>
+                    <span className="text-[10px] text-muted-foreground">({med.reviews})</span>
                   </div>
-
-                  <div className="flex items-center gap-1">
-                    <span className="text-xs md:text-sm font-bold text-primary">₹{med.price}</span>
-                    <span className="text-[9px] md:text-[10px] text-muted-foreground line-through">₹{med.mrp}</span>
+                  
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="font-bold text-sm md:text-base">₹{med.price}</span>
+                    <span className="text-xs text-muted-foreground line-through">₹{med.mrp}</span>
                   </div>
-
-                  {getCartQuantity(med.id) > 0 ? (
-                    <div className="flex items-center gap-1">
-                      <Button variant="outline" size="icon" className="h-7 w-7" onClick={() => removeFromCart(med.id)}>
+                  
+                  {cartQty > 0 ? (
+                    <div className="flex items-center justify-between bg-primary/10 rounded-lg p-1">
+                      <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => removeFromCart(med.id)}>
                         <Minus className="w-3 h-3" />
                       </Button>
-                      <span className="w-6 text-center font-semibold text-xs">{getCartQuantity(med.id)}</span>
-                      <Button variant="outline" size="icon" className="h-7 w-7" onClick={() => addToCart(med.id)}>
+                      <span className="font-semibold text-primary">{cartQty}</span>
+                      <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => addToCart(med.id)}>
                         <Plus className="w-3 h-3" />
                       </Button>
                     </div>
                   ) : (
-                    <Button className="w-full h-7 md:h-8 text-[10px] md:text-xs" onClick={() => addToCart(med.id)}>
+                    <Button className="w-full h-8 text-xs" onClick={() => addToCart(med.id)}>
+                      <Plus className="w-3 h-3 mr-1" />
                       Add to Cart
                     </Button>
                   )}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
         {filteredMedicines.length === 0 && (
-          <div className="text-center py-8 md:py-12">
-            <Package className="w-10 h-10 md:w-12 md:h-12 mx-auto text-muted-foreground mb-3" />
-            <h3 className="text-base md:text-lg font-semibold mb-1">No products found</h3>
-            <p className="text-xs md:text-sm text-muted-foreground">Try searching with different keywords</p>
+          <div className="text-center py-12">
+            <Pill className="w-12 h-12 mx-auto text-muted-foreground/30 mb-4" />
+            <h3 className="font-semibold text-lg mb-2">No products found</h3>
+            <p className="text-sm text-muted-foreground">Try adjusting your search or category filters</p>
+          </div>
+        )}
+
+        {/* Floating Cart */}
+        {cartCount > 0 && (
+          <div className="fixed bottom-20 md:bottom-6 left-4 right-4 md:left-auto md:right-6 md:w-auto z-50">
+            <Button 
+              size="lg"
+              className="w-full md:w-auto rounded-2xl shadow-2xl gap-4 h-14 px-6"
+              onClick={() => setShowCart(true)}
+            >
+              <div className="flex items-center gap-2">
+                <ShoppingCart className="h-5 w-5" />
+                <Badge variant="secondary" className="bg-primary-foreground text-primary">
+                  {cartCount}
+                </Badge>
+              </div>
+              <div className="h-6 w-px bg-primary-foreground/30" />
+              <span className="font-bold">₹{subtotal}</span>
+            </Button>
           </div>
         )}
       </div>

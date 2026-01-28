@@ -112,7 +112,7 @@ const NutritionStore = () => {
       description: mealBox.items.join(', '),
       price: mealBox.price,
       image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400',
-      category: 'salads' as const,
+      category: 'mealbox' as const,
       season: ['all'],
       nutrients: [],
       calories: mealBox.calories,
@@ -156,7 +156,7 @@ const NutritionStore = () => {
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input 
-                  placeholder="Search for fruits, vegetables, salads..."
+                  placeholder="Search for healthy drinks, shakes, meal boxes..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="pl-10 pr-10 h-11 rounded-xl bg-secondary/30 border-0 focus-visible:ring-2"

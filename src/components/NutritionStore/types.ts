@@ -4,7 +4,7 @@ export interface NutritionFood {
   description: string;
   price: number;
   image: string;
-  category: 'fruits' | 'vegetables' | 'salads' | 'smoothies';
+  category: 'drinks' | 'shakes' | 'mealbox' | 'bowls';
   season: string[];
   nutrients: string[];
   calories: number;

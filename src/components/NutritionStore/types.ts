@@ -2,6 +2,7 @@ export interface NutritionFood {
   id: string;
   name: string;
   description: string;
+  benefits?: string;
   price: number;
   image: string;
   category: 'drinks' | 'shakes' | 'mealbox' | 'bowls';

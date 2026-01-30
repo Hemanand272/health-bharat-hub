@@ -149,7 +149,18 @@ const FoodItemCard = ({ food, cartItem, onAddToCart, onUpdateQuantity, variant =
           </span>
         </div>
 
-        <p className="text-sm text-muted-foreground line-clamp-2 mb-3">{food.description}</p>
+        <p className="text-sm text-muted-foreground line-clamp-2 mb-2">{food.description}</p>
+
+        {/* Health Benefits */}
+        {food.benefits && (
+          <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 rounded-lg p-2.5 mb-3 border border-green-200 dark:border-green-800">
+            <div className="flex items-center gap-1.5 mb-1">
+              <Info className="h-3.5 w-3.5 text-green-600" />
+              <span className="text-xs font-semibold text-green-700 dark:text-green-400">Health Benefits</span>
+            </div>
+            <p className="text-xs text-green-800 dark:text-green-300 leading-relaxed line-clamp-3">{food.benefits}</p>
+          </div>
+        )}
 
         {/* Nutrients */}
         <div className="flex flex-wrap gap-1.5 mb-4">

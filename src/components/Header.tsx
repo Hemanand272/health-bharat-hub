@@ -35,7 +35,27 @@ const Header = ({ onNavigate }: HeaderProps) => {
   const [expandedMenus, setExpandedMenus] = useState<string[]>([]);
   const navigate = useNavigate();
 
+  const routeMap: Record<string, string> = {
+    home: "/",
+    about: "/about",
+    features: "/features",
+    blog: "/blog",
+    testimonials: "/testimonials",
+    community: "/community",
+    "nutrition-store": "/nutrition-store",
+    "medicine-store": "/medicine-store",
+    consultation: "/consultation",
+    join: "/join",
+  };
+
   const scrollToSection = (id: string) => {
+    // Check if we have a dedicated route for this section
+    if (routeMap[id]) {
+      navigate(routeMap[id]);
+      setIsMenuOpen(false);
+      return;
+    }
+    
     if (onNavigate) {
       onNavigate(id);
     } else {
